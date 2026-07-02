@@ -1,4 +1,3 @@
-
 // ============================
 // TRANSLATIONS
 // ============================
@@ -351,26 +350,89 @@ function calculateQuote() {
   bHTML += `<div class="breakdown-item"><span>Total Estimate</span><span>${total.toLocaleString()} DA</span></div>`;
   document.getElementById('qBreakdown').innerHTML = bHTML;
   // Store for saving
-  window._lastQuote = { name, email, service, desc, total, complexity, timeline, date: new Date().toLocaleDateString() };
+  window._lastQuote = { 
+    name, email, service, desc, total, complexity, timeline, 
+    date: new Date().toLocaleDateString() 
+  };
   showToast('success', 'Quote calculated successfully!');
 }
 
+// ============================
+// SAVE QUOTE REQUEST TO DATABASE
+// ============================
 function saveQuoteRequest() {
-  if (!window._lastQuote) { showToast('error','Please calculate your quote first.'); return; }
-  const requests = JSON.parse(localStorage.getItem('hds_requests')||'[]');
-  requests.unshift({ id: Date.now(), ...window._lastQuote });
-  localStorage.setItem('hds_requests', JSON.stringify(requests));
-  showToast('success','Your request has been submitted! We\'ll be in touch soon.');
-  // Reset form
-  ['qName','qEmail','qPhone','qCompany','qDesc'].forEach(id => document.getElementById(id).value='');
-  document.getElementById('qService').value='';
-  document.getElementById('qPages').value='5';
-  ['fMobile','fDatabase','fAuth','fPayment','fAI','fAdmin'].forEach(id => document.getElementById(id).checked=false);
-  document.getElementById('quoteResult').classList.remove('show');
-  document.getElementById('quotePlaceholder').style.display='flex';
-  window._lastQuote = null;
+    if (!window._lastQuote) { 
+        showToast('error', 'Please calculate your quote first.'); 
+        return; 
+    }
+    
+    const q = window._lastQuote;
+    
+    // Get selected features
+    const features = [];
+    const featureMap = {
+        'fMobile': 'Mobile App Version',
+        'fDatabase': 'Database',
+        'fAuth': 'User Authentication',
+        'fPayment': 'Payment System',
+        'fAI': 'AI Features',
+        'fAdmin': 'Admin Dashboard'
+    };
+    
+    Object.keys(featureMap).forEach(id => {
+        if (document.getElementById(id).checked) {
+            features.push(featureMap[id]);
+        }
+    });
+    
+    const requestData = {
+        name: q.name,
+        email: q.email,
+        phone: document.getElementById('qPhone').value.trim(),
+        company: document.getElementById('qCompany').value.trim(),
+        service: q.service,
+        description: q.desc,
+        pages: parseInt(document.getElementById('qPages').value) || 1,
+        features: features,
+        deadline: document.getElementById('qDeadline').value || null,
+        total: q.total,
+        complexity: q.complexity,
+        timeline: q.timeline
+    };
+    
+    // Send to API
+    fetch('api.php?action=save_request', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            showToast('success', 'Your request has been submitted! We\'ll be in touch soon.');
+            // Reset form
+            ['qName','qEmail','qPhone','qCompany','qDesc'].forEach(id => document.getElementById(id).value='');
+            document.getElementById('qService').value='';
+            document.getElementById('qPages').value='5';
+            ['fMobile','fDatabase','fAuth','fPayment','fAI','fAdmin'].forEach(id => document.getElementById(id).checked=false);
+            document.getElementById('quoteResult').classList.remove('show');
+            document.getElementById('quotePlaceholder').style.display='flex';
+            window._lastQuote = null;
+        } else {
+            showToast('error', data.error || 'Failed to submit request');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showToast('error', 'Failed to submit request. Please try again.');
+    });
 }
 
+// ============================
+// EXPORT QUOTE PDF
+// ============================
 function exportQuotePDF() {
   if (!window._lastQuote) { showToast('error','Please calculate a quote first.'); return; }
   const q = window._lastQuote;
@@ -385,14 +447,42 @@ function exportQuotePDF() {
 // CONTACT FORM
 // ============================
 function sendContact() {
-  const name = document.getElementById('cName').value.trim();
-  const email = document.getElementById('cEmail').value.trim();
-  const subject = document.getElementById('cSubject').value.trim();
-  const msg = document.getElementById('cMessage').value.trim();
-  if (!name || !email || !subject || !msg) { showToast('error','Please fill in all fields.'); return; }
-  if (!email.includes('@')) { showToast('error','Please enter a valid email.'); return; }
-  showToast('success','Message sent! I\'ll reply within 24 hours.');
-  ['cName','cEmail','cSubject','cMessage'].forEach(id => document.getElementById(id).value='');
+    const name = document.getElementById('cName').value.trim();
+    const email = document.getElementById('cEmail').value.trim();
+    const subject = document.getElementById('cSubject').value.trim();
+    const msg = document.getElementById('cMessage').value.trim();
+    
+    if (!name || !email || !subject || !msg) { 
+        showToast('error', 'Please fill in all fields.'); 
+        return; 
+    }
+    if (!email.includes('@')) { 
+        showToast('error', 'Please enter a valid email.'); 
+        return; 
+    }
+    
+    const data = { name, email, subject, message: msg };
+    
+    fetch('api.php?action=save_contact', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.success) {
+            showToast('success', 'Message sent! I\'ll reply within 24 hours.');
+            ['cName','cEmail','cSubject','cMessage'].forEach(id => document.getElementById(id).value='');
+        } else {
+            showToast('error', result.error || 'Failed to send message');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showToast('error', 'Failed to send message. Please try again.');
+    });
 }
 
 // ============================
@@ -402,91 +492,158 @@ function openAdmin() {
   document.getElementById('admin').classList.add('open');
   loadAdminData();
 }
+
 function closeAdmin() {
   document.getElementById('admin').classList.remove('open');
 }
 
 function loadAdminData() {
-  const requests = JSON.parse(localStorage.getItem('hds_requests')||'[]');
-  document.getElementById('statTotal').textContent = requests.length;
-  if (requests.length > 0) {
-    const avg = Math.round(requests.reduce((s,r)=>s+r.total,0)/requests.length);
-    document.getElementById('statAvg').textContent = avg.toLocaleString()+' DA';
-    const high = requests.filter(r=>r.complexity==='High').length;
-    document.getElementById('statHigh').textContent = high;
-    const svcCount = {};
-    requests.forEach(r => svcCount[r.service] = (svcCount[r.service]||0)+1);
-    const top = Object.entries(svcCount).sort((a,b)=>b[1]-a[1])[0];
-    document.getElementById('statServices').textContent = top ? top[0] : '—';
-  }
-  const tbody = document.getElementById('requestsTableBody');
-  const noReq = document.getElementById('noRequests');
-  if (requests.length === 0) {
-    tbody.innerHTML=''; noReq.style.display='block'; return;
-  }
-  noReq.style.display='none';
-  tbody.innerHTML = requests.map((r,i) => `
-    <tr>
-      <td>${i+1}</td>
-      <td><strong>${r.name}</strong></td>
-      <td>${r.email}</td>
-      <td>${r.service}</td>
-      <td style="color:var(--blue-light);font-weight:700">${r.total.toLocaleString()} DA</td>
-      <td><span class="complexity-badge complexity-${(r.complexity||'').toLowerCase()}">${r.complexity}</span></td>
-      <td>${r.date}</td>
-      <td>
-        <button class="tbl-btn" onclick="viewRequest(${r.id})"><i class="fa fa-eye"></i></button>
-        <button class="tbl-btn danger" onclick="deleteRequest(${r.id})"><i class="fa fa-trash"></i></button>
-      </td>
-    </tr>
-  `).join('');
+    // Load stats
+    fetch('api.php?action=get_stats')
+        .then(response => response.json())
+        .then(stats => {
+            if (!stats.error) {
+                document.getElementById('statTotal').textContent = stats.total || 0;
+                document.getElementById('statAvg').textContent = (stats.avg || 0).toLocaleString() + ' DA';
+                document.getElementById('statHigh').textContent = stats.high || 0;
+                document.getElementById('statServices').textContent = stats.top || '—';
+            }
+        })
+        .catch(error => console.error('Error loading stats:', error));
+    
+    // Load requests
+    fetch('api.php?action=get_requests')
+        .then(response => response.json())
+        .then(requests => {
+            const tbody = document.getElementById('requestsTableBody');
+            const noReq = document.getElementById('noRequests');
+            
+            if (!requests || requests.length === 0 || requests.error) {
+                tbody.innerHTML = '';
+                noReq.style.display = 'block';
+                return;
+            }
+            
+            noReq.style.display = 'none';
+            tbody.innerHTML = requests.map((r, i) => `
+                <tr>
+                    <td>${i+1}</td>
+                    <td><strong>${escapeHtml(r.client_name)}</strong></td>
+                    <td>${escapeHtml(r.client_email)}</td>
+                    <td>${escapeHtml(r.service_type)}</td>
+                    <td style="color:var(--blue-light);font-weight:700">${parseFloat(r.total_quote).toLocaleString()} DA</td>
+                    <td><span class="complexity-badge complexity-${(r.complexity || '').toLowerCase()}">${escapeHtml(r.complexity)}</span></td>
+                    <td>${r.created_at ? new Date(r.created_at).toLocaleDateString() : ''}</td>
+                    <td>
+                        <button class="tbl-btn" onclick="viewRequest(${r.id})"><i class="fa fa-eye"></i></button>
+                        <button class="tbl-btn danger" onclick="deleteRequest(${r.id})"><i class="fa fa-trash"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+        })
+        .catch(error => {
+            console.error('Error loading requests:', error);
+            showToast('error', 'Failed to load requests');
+        });
 }
 
 function viewRequest(id) {
-  const requests = JSON.parse(localStorage.getItem('hds_requests')||'[]');
-  const r = requests.find(x=>x.id===id);
-  if (!r) return;
-  document.getElementById('modalTitle').textContent = `Request from ${r.name}`;
-  document.getElementById('modalBody').innerHTML = `
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
-      <div><strong>Email:</strong><br>${r.email}</div>
-      <div><strong>Service:</strong><br>${r.service}</div>
-      <div><strong>Quote:</strong><br><span style="color:var(--blue-light);font-weight:700;font-size:1.2rem">${r.total.toLocaleString()} DA</span></div>
-      <div><strong>Complexity:</strong><br><span class="complexity-badge complexity-${(r.complexity||'').toLowerCase()}">${r.complexity}</span></div>
-      <div><strong>Timeline:</strong><br>${r.timeline}</div>
-      <div><strong>Date:</strong><br>${r.date}</div>
-    </div>
-    <div><strong>Description:</strong><br><p style="color:var(--text-secondary);margin-top:0.5rem;line-height:1.6">${r.desc}</p></div>
-  `;
-  document.getElementById('projectModal').classList.add('open');
+    fetch(`api.php?action=get_request&id=${id}`)
+        .then(response => response.json())
+        .then(r => {
+            if (r.error) {
+                showToast('error', r.error);
+                return;
+            }
+            
+            document.getElementById('modalTitle').textContent = `Request from ${r.client_name}`;
+            document.getElementById('modalBody').innerHTML = `
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
+                    <div><strong>Email:</strong><br>${escapeHtml(r.client_email)}</div>
+                    <div><strong>Service:</strong><br>${escapeHtml(r.service_type)}</div>
+                    <div><strong>Quote:</strong><br><span style="color:var(--blue-light);font-weight:700;font-size:1.2rem">${parseFloat(r.total_quote).toLocaleString()} DA</span></div>
+                    <div><strong>Complexity:</strong><br><span class="complexity-badge complexity-${(r.complexity || '').toLowerCase()}">${escapeHtml(r.complexity)}</span></div>
+                    <div><strong>Timeline:</strong><br>${escapeHtml(r.timeline)}</div>
+                    <div><strong>Date:</strong><br>${r.created_at ? new Date(r.created_at).toLocaleDateString() : ''}</div>
+                </div>
+                <div><strong>Description:</strong><br><p style="color:var(--text-secondary);margin-top:0.5rem;line-height:1.6">${escapeHtml(r.project_description)}</p></div>
+                ${r.features ? `<div><strong>Features:</strong><br><p style="color:var(--text-secondary);margin-top:0.5rem">${Array.isArray(r.features) ? r.features.join(', ') : r.features}</p></div>` : ''}
+            `;
+            document.getElementById('projectModal').classList.add('open');
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showToast('error', 'Failed to load request details');
+        });
 }
 
 function deleteRequest(id) {
-  let requests = JSON.parse(localStorage.getItem('hds_requests')||'[]');
-  requests = requests.filter(r=>r.id!==id);
-  localStorage.setItem('hds_requests', JSON.stringify(requests));
-  loadAdminData();
-  showToast('success','Request deleted.');
+    if (!confirm('Delete this request?')) return;
+    
+    fetch(`api.php?action=delete_request&id=${id}`, {
+        method: 'DELETE'
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            loadAdminData();
+            showToast('success', 'Request deleted.');
+        } else {
+            showToast('error', data.error || 'Failed to delete request');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showToast('error', 'Failed to delete request');
+    });
 }
 
 function clearAllRequests() {
-  if (!confirm('Clear all requests? This cannot be undone.')) return;
-  localStorage.removeItem('hds_requests');
-  loadAdminData();
-  showToast('success','All requests cleared.');
+    if (!confirm('Clear all requests? This cannot be undone.')) return;
+    
+    fetch('api.php?action=clear_requests', {
+        method: 'DELETE'
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            loadAdminData();
+            showToast('success', 'All requests cleared.');
+        } else {
+            showToast('error', data.error || 'Failed to clear requests');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showToast('error', 'Failed to clear requests');
+    });
 }
 
 function exportAllPDF() {
-  const requests = JSON.parse(localStorage.getItem('hds_requests')||'[]');
-  if (requests.length===0) { showToast('error','No requests to export.'); return; }
-  let content = 'HANAA DEV SOLUTIONS — ALL REQUESTS\n'+'='.repeat(50)+'\n\n';
-  requests.forEach((r,i) => {
-    content += `[${i+1}] ${r.name} | ${r.email} | ${r.service} | ${r.total.toLocaleString()} DA | ${r.complexity} | ${r.date}\n`;
-  });
-  const blob = new Blob([content],{type:'text/plain'});
-  const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
-  a.download='All_Requests.txt'; a.click();
-  showToast('success','Exported!');
+    fetch('api.php?action=get_requests')
+        .then(response => response.json())
+        .then(requests => {
+            if (!requests || requests.length === 0 || requests.error) {
+                showToast('error', 'No requests to export.');
+                return;
+            }
+            
+            let content = 'HANAA DEV SOLUTIONS — ALL REQUESTS\n' + '='.repeat(50) + '\n\n';
+            requests.forEach((r, i) => {
+                content += `[${i+1}] ${r.client_name} | ${r.client_email} | ${r.service_type} | ${parseFloat(r.total_quote).toLocaleString()} DA | ${r.complexity} | ${r.created_at ? new Date(r.created_at).toLocaleDateString() : ''}\n`;
+            });
+            
+            const blob = new Blob([content], { type: 'text/plain' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'All_Requests.txt';
+            a.click();
+            showToast('success', 'Exported!');
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showToast('error', 'Failed to export requests');
+        });
 }
 
 // ============================
@@ -526,6 +683,7 @@ function openProjectModal(idx) {
 function closeModal(id) {
   document.getElementById(id).classList.remove('open');
 }
+
 document.querySelectorAll('.modal-overlay').forEach(overlay => {
   overlay.addEventListener('click', e => { if(e.target===overlay) overlay.classList.remove('open'); });
 });
@@ -544,8 +702,24 @@ function showToast(type, msg) {
   toastTimer = setTimeout(() => t.classList.remove('show'), 3500);
 }
 
+// ============================
+// HELPER FUNCTIONS
+// ============================
+function escapeHtml(text) {
+    if (!text) return '';
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+// ============================
+// INITIALIZATION
+// ============================
 // Set min date for deadline
 document.getElementById('qDeadline').min = new Date().toISOString().split('T')[0];
 
 // Initial lang
 applyLang('en');
+
+console.log('🚀 Hanaa Dev Solutions loaded successfully!');
+console.log('💾 MySQL Database integration enabled');
