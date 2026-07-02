@@ -1,0 +1,1718 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Hanaa Dev Solutions - Professional Software Developer & IT Engineer. Custom websites, mobile apps, AI solutions and more.">
+<meta name="keywords" content="software developer, web development, mobile app, AI solutions, Algeria, IT engineer">
+<title>Hanaa Dev Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root {
+  --blue-dark: #0f172a;
+  --blue-mid: #1e3a5f;
+  --blue-accent: #2563eb;
+  --blue-light: #60a5fa;
+  --purple-accent: #7c3aed;
+  --purple-light: #a78bfa;
+  --white: #ffffff;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --surface: #1e293b;
+  --surface2: #0f172a;
+  --border: rgba(100,116,139,0.2);
+  --card-bg: rgba(30,41,59,0.8);
+  --gradient: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+  --gradient-soft: linear-gradient(135deg, rgba(37,99,235,0.15) 0%, rgba(124,58,237,0.15) 100%);
+  --shadow: 0 20px 60px rgba(0,0,0,0.4);
+  --radius: 16px;
+  --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="light"] {
+  --blue-dark: #f8fafc;
+  --blue-mid: #e2e8f0;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --surface: #ffffff;
+  --surface2: #f1f5f9;
+  --border: rgba(100,116,139,0.15);
+  --card-bg: rgba(255,255,255,0.95);
+  --shadow: 0 20px 60px rgba(0,0,0,0.1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--blue-dark);
+  color: var(--text-primary);
+  line-height: 1.6;
+  transition: background var(--transition), color var(--transition);
+  overflow-x: hidden;
+}
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--surface2); }
+::-webkit-scrollbar-thumb { background: var(--gradient); border-radius: 3px; }
+
+/* ===== NAV ===== */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  backdrop-filter: blur(20px);
+  background: rgba(15,23,42,0.85);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  height: 70px;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: background var(--transition);
+}
+[data-theme="light"] nav { background: rgba(248,250,252,0.9); }
+.nav-logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.4rem; font-weight: 700;
+  background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; text-decoration: none;
+}
+.nav-links { display: flex; gap: 0.2rem; list-style: none; align-items: center; }
+.nav-links a {
+  color: var(--text-secondary); text-decoration: none;
+  padding: 0.5rem 0.8rem; border-radius: 8px; font-size: 0.9rem;
+  transition: all var(--transition); font-weight: 500;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--blue-light); background: rgba(96,165,250,0.1); }
+.nav-actions { display: flex; align-items: center; gap: 0.8rem; }
+.lang-btn, .theme-btn {
+  background: var(--surface); border: 1px solid var(--border);
+  color: var(--text-secondary); padding: 0.4rem 0.8rem; border-radius: 8px;
+  cursor: pointer; font-size: 0.8rem; transition: all var(--transition);
+  font-family: inherit;
+}
+.lang-btn:hover, .theme-btn:hover { border-color: var(--blue-accent); color: var(--blue-light); }
+.hamburger { display: none; background: none; border: none; color: var(--text-primary); font-size: 1.4rem; cursor: pointer; }
+
+/* ===== HERO ===== */
+#home {
+  min-height: 100vh; display: flex; align-items: center;
+  padding: 100px 2rem 4rem;
+  position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(37,99,235,0.12) 0%, transparent 60%),
+              radial-gradient(ellipse 50% 50% at 20% 80%, rgba(124,58,237,0.1) 0%, transparent 60%);
+}
+.hero-grid {
+  max-width: 1200px; margin: 0 auto; width: 100%;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(37,99,235,0.12); border: 1px solid rgba(37,99,235,0.3);
+  color: var(--blue-light); padding: 0.4rem 1rem; border-radius: 50px;
+  font-size: 0.8rem; font-weight: 600; letter-spacing: 0.05em;
+  margin-bottom: 1.5rem; text-transform: uppercase;
+}
+.hero-badge::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--blue-light); animation: pulse-dot 1.5s infinite; }
+@keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.5)} }
+.hero-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; line-height: 1.1;
+  margin-bottom: 0.5rem;
+}
+.hero-name span { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-title { font-size: 1.1rem; color: var(--purple-light); font-weight: 500; margin-bottom: 1.5rem; }
+.hero-desc { color: var(--text-secondary); font-size: 1.05rem; max-width: 480px; margin-bottom: 2.5rem; line-height: 1.7; }
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.75rem 1.75rem; border-radius: 12px; font-size: 0.95rem;
+  font-weight: 600; text-decoration: none; cursor: pointer;
+  transition: all var(--transition); border: none; font-family: inherit;
+}
+.btn-primary {
+  background: var(--gradient); color: white;
+  box-shadow: 0 4px 20px rgba(37,99,235,0.35);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(37,99,235,0.5); }
+.btn-outline {
+  background: transparent; color: var(--blue-light);
+  border: 1.5px solid rgba(96,165,250,0.4);
+}
+.btn-outline:hover { background: rgba(96,165,250,0.1); border-color: var(--blue-light); transform: translateY(-2px); }
+.hero-stats { display: flex; gap: 2rem; margin-top: 3rem; }
+.stat { text-align: center; }
+.stat-num { font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; font-weight: 700; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.stat-label { font-size: 0.78rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+
+/* Photo area */
+.hero-visual { display: flex; justify-content: center; align-items: center; position: relative; }
+.photo-frame {
+  width: 320px; height: 380px; border-radius: 30px;
+  background: var(--gradient-soft); border: 2px solid rgba(96,165,250,0.2);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  box-shadow: 0 30px 80px rgba(37,99,235,0.2), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+.photo-avatar { font-size: 8rem; margin-bottom: 0.5rem; }
+.photo-name-tag {
+  background: rgba(37,99,235,0.2); border: 1px solid rgba(37,99,235,0.3);
+  color: var(--blue-light); padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;
+}
+.orbit-ring {
+  position: absolute; border-radius: 50%; border: 1px dashed rgba(96,165,250,0.2);
+  animation: spin 20s linear infinite;
+}
+.orbit-ring:nth-child(1) { width: 400px; height: 400px; top: -40px; left: -40px; }
+.orbit-ring:nth-child(2) { width: 480px; height: 480px; top: -80px; left: -80px; animation-duration: 30s; animation-direction: reverse; }
+.tech-float {
+  position: absolute; background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 0.4rem 0.8rem; font-size: 0.75rem; font-weight: 600;
+  color: var(--blue-light); box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+.tech-float:nth-child(3) { top: 20px; right: -20px; animation: float1 3s ease-in-out infinite; }
+.tech-float:nth-child(4) { bottom: 80px; right: -30px; animation: float2 3.5s ease-in-out infinite 0.5s; }
+.tech-float:nth-child(5) { bottom: 20px; left: -20px; animation: float1 4s ease-in-out infinite 1s; }
+.tech-float:nth-child(6) { top: 80px; left: -30px; animation: float2 3s ease-in-out infinite 0.3s; }
+@keyframes float1 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+@keyframes float2 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)} }
+@keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+
+/* ===== SECTION ===== */
+section { padding: 6rem 2rem; }
+.container { max-width: 1200px; margin: 0 auto; }
+.section-header { text-align: center; margin-bottom: 4rem; }
+.section-eyebrow {
+  display: inline-block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--blue-accent);
+  background: rgba(37,99,235,0.1); border: 1px solid rgba(37,99,235,0.25);
+  padding: 0.3rem 1rem; border-radius: 50px; margin-bottom: 1rem;
+}
+.section-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 700; margin-bottom: 1rem;
+}
+.section-title span { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.section-sub { color: var(--text-secondary); font-size: 1.05rem; max-width: 560px; margin: 0 auto; }
+.divider { width: 60px; height: 3px; background: var(--gradient); border-radius: 2px; margin: 1.5rem auto 0; }
+
+/* ===== ABOUT ===== */
+#about { background: var(--surface2); }
+.about-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 5rem; align-items: start; }
+.about-photo-box {
+  background: var(--gradient-soft); border: 1px solid rgba(96,165,250,0.15);
+  border-radius: 24px; padding: 3rem; text-align: center;
+  position: sticky; top: 100px;
+}
+.about-avatar { font-size: 6rem; margin-bottom: 1rem; }
+.about-name { font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; font-weight: 700; margin-bottom: 0.3rem; }
+.about-role { color: var(--purple-light); font-size: 0.9rem; margin-bottom: 1.5rem; }
+.about-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+.about-tag {
+  background: rgba(37,99,235,0.12); border: 1px solid rgba(37,99,235,0.25);
+  color: var(--blue-light); font-size: 0.75rem; padding: 0.25rem 0.7rem; border-radius: 20px;
+}
+.about-bio { font-size: 1.05rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 2.5rem; }
+.skills-section h3 {
+  font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 700;
+  margin-bottom: 1.5rem; color: var(--text-primary);
+}
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 0.8rem; }
+.skill-chip {
+  display: flex; align-items: center; gap: 0.5rem;
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: 12px; padding: 0.7rem 1rem; font-size: 0.85rem; font-weight: 500;
+  transition: all var(--transition);
+}
+.skill-chip:hover { border-color: var(--blue-accent); color: var(--blue-light); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(37,99,235,0.15); }
+.skill-chip i { color: var(--blue-accent); font-size: 1rem; }
+
+/* ===== PORTFOLIO ===== */
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem; }
+.project-card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; transition: all var(--transition);
+  backdrop-filter: blur(10px);
+}
+.project-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); border-color: rgba(96,165,250,0.3); }
+.project-img {
+  height: 200px; display: flex; align-items: center; justify-content: center;
+  font-size: 4rem; position: relative; overflow: hidden;
+}
+.project-img::after {
+  content:''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.5));
+}
+.project-body { padding: 1.5rem; }
+.project-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+.project-desc { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem; }
+.project-techs { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.2rem; }
+.tech-tag {
+  background: rgba(124,58,237,0.12); border: 1px solid rgba(124,58,237,0.25);
+  color: var(--purple-light); font-size: 0.72rem; padding: 0.2rem 0.6rem; border-radius: 20px;
+}
+.project-btns { display: flex; gap: 0.8rem; }
+.btn-sm {
+  padding: 0.5rem 1rem; font-size: 0.82rem; border-radius: 8px;
+  font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem;
+  cursor: pointer; transition: all var(--transition); text-decoration: none; border: none; font-family: inherit;
+}
+.btn-sm.primary { background: var(--gradient); color: white; }
+.btn-sm.outline { background: transparent; color: var(--blue-light); border: 1px solid rgba(96,165,250,0.35); }
+.btn-sm.primary:hover { box-shadow: 0 4px 15px rgba(37,99,235,0.35); transform: translateY(-1px); }
+.btn-sm.outline:hover { background: rgba(96,165,250,0.1); transform: translateY(-1px); }
+
+/* ===== SERVICES ===== */
+#services { background: var(--surface2); }
+.services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+.service-card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 2rem; text-align: center;
+  transition: all var(--transition); backdrop-filter: blur(10px); position: relative; overflow: hidden;
+}
+.service-card::before {
+  content:''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--gradient); transform: scaleX(0); transform-origin: left;
+  transition: transform var(--transition);
+}
+.service-card:hover::before { transform: scaleX(1); }
+.service-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); border-color: rgba(96,165,250,0.2); }
+.service-icon {
+  width: 70px; height: 70px; border-radius: 18px;
+  background: var(--gradient); display: flex; align-items: center; justify-content: center;
+  font-size: 1.8rem; margin: 0 auto 1.2rem; box-shadow: 0 8px 25px rgba(37,99,235,0.3);
+}
+.service-name { font-family: 'Space Grotesk', sans-serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; }
+.service-desc { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.6; margin-bottom: 1.2rem; }
+.service-price {
+  display: inline-block;
+  background: rgba(37,99,235,0.1); border: 1px solid rgba(37,99,235,0.25);
+  color: var(--blue-light); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 700;
+}
+
+/* ===== QUOTATION FORM ===== */
+#quote { background: var(--blue-dark); }
+.quote-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+.quote-form-box, .quote-result-box {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: 24px; padding: 2.5rem; backdrop-filter: blur(10px);
+}
+.form-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.6rem; }
+.form-title i { color: var(--blue-accent); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+.form-group { margin-bottom: 1rem; }
+.form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 0.4rem; }
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%; background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 0.75rem 1rem; color: var(--text-primary);
+  font-family: inherit; font-size: 0.9rem; transition: border-color var(--transition);
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+  outline: none; border-color: var(--blue-accent); box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+}
+.form-group textarea { resize: vertical; min-height: 100px; }
+.form-group select option { background: var(--surface2); }
+.checkbox-group { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 1rem; }
+.checkbox-item {
+  display: flex; align-items: center; gap: 0.6rem;
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 0.6rem 0.8rem; cursor: pointer;
+  transition: all var(--transition); font-size: 0.85rem;
+}
+.checkbox-item input[type="checkbox"] { accent-color: var(--blue-accent); width: 15px; height: 15px; }
+.checkbox-item:hover { border-color: var(--blue-accent); }
+.checkbox-item input:checked + span { color: var(--blue-light); }
+
+/* Quote Result */
+.quote-placeholder {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  min-height: 400px; color: var(--text-secondary); text-align: center; gap: 1rem;
+}
+.quote-placeholder i { font-size: 3.5rem; color: var(--border); }
+.quote-result { display: none; }
+.quote-result.show { display: block; }
+.quote-total {
+  text-align: center; margin-bottom: 2rem; padding: 2rem;
+  background: var(--gradient-soft); border: 1px solid rgba(37,99,235,0.2);
+  border-radius: 16px;
+}
+.quote-amount { font-family: 'Space Grotesk', sans-serif; font-size: 3rem; font-weight: 700; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.quote-label { color: var(--text-secondary); font-size: 0.85rem; }
+.quote-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+.quote-meta-item {
+  background: var(--surface2); border-radius: 12px; padding: 1rem; text-align: center;
+  border: 1px solid var(--border);
+}
+.meta-val { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--blue-light); }
+.meta-key { font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.2rem; }
+.complexity-badge {
+  display: inline-block; padding: 0.3rem 0.8rem; border-radius: 20px;
+  font-size: 0.8rem; font-weight: 700;
+}
+.complexity-low { background: rgba(34,197,94,0.15); color: #86efac; border: 1px solid rgba(34,197,94,0.25); }
+.complexity-medium { background: rgba(234,179,8,0.15); color: #fde047; border: 1px solid rgba(234,179,8,0.25); }
+.complexity-high { background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.25); }
+.quote-breakdown { margin-bottom: 1.5rem; }
+.breakdown-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.6rem 0; border-bottom: 1px solid var(--border); font-size: 0.88rem;
+}
+.breakdown-item:last-child { border-bottom: none; font-weight: 700; font-size: 0.95rem; color: var(--blue-light); }
+.breakdown-label { color: var(--text-secondary); }
+.breakdown-price { font-weight: 600; }
+
+/* ===== TESTIMONIALS ===== */
+#testimonials { background: var(--surface2); }
+.testimonials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+.testimonial-card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 2rem; transition: all var(--transition); backdrop-filter: blur(10px);
+}
+.testimonial-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: rgba(96,165,250,0.2); }
+.stars { color: #fbbf24; font-size: 1rem; margin-bottom: 1rem; }
+.testimonial-text { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem; font-style: italic; }
+.testimonial-author { display: flex; align-items: center; gap: 0.8rem; }
+.author-avatar {
+  width: 44px; height: 44px; border-radius: 50%; background: var(--gradient);
+  display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+}
+.author-name { font-weight: 700; font-size: 0.9rem; }
+.author-role { font-size: 0.78rem; color: var(--text-secondary); }
+
+/* ===== CONTACT ===== */
+.contact-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 4rem; align-items: start; }
+.contact-info h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; }
+.contact-info p { color: var(--text-secondary); line-height: 1.7; margin-bottom: 2rem; }
+.social-links { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-bottom: 2rem; }
+.social-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.7rem 1.2rem; border-radius: 12px; font-size: 0.88rem; font-weight: 600;
+  text-decoration: none; transition: all var(--transition); border: 1.5px solid var(--border);
+  color: var(--text-primary); background: var(--card-bg);
+}
+.social-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+.social-btn.whatsapp:hover { border-color: #25d366; color: #25d366; }
+.social-btn.email:hover { border-color: var(--blue-accent); color: var(--blue-light); }
+.social-btn.linkedin:hover { border-color: #0077b5; color: #0077b5; }
+.social-btn.github:hover { border-color: var(--text-secondary); color: var(--text-primary); }
+.social-btn.instagram:hover { border-color: #e1306c; color: #e1306c; }
+.contact-form-box {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: 24px; padding: 2.5rem; backdrop-filter: blur(10px);
+}
+
+/* ===== ADMIN ===== */
+#admin {
+  display: none; position: fixed; inset: 0; z-index: 2000;
+  background: var(--blue-dark); overflow-y: auto;
+}
+#admin.open { display: block; }
+.admin-header {
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  padding: 1.2rem 2rem; display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 10;
+}
+.admin-header h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; font-weight: 700; }
+.admin-body { padding: 2rem; max-width: 1200px; margin: 0 auto; }
+.admin-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem; }
+.admin-stat-card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.2rem; text-align: center;
+}
+.admin-stat-card .num { font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.admin-stat-card .label { font-size: 0.8rem; color: var(--text-secondary); }
+.requests-table-wrap { overflow-x: auto; }
+.requests-table { width: 100%; border-collapse: collapse; }
+.requests-table th {
+  background: var(--surface2); padding: 0.8rem 1rem; text-align: left;
+  font-size: 0.8rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em;
+}
+.requests-table td {
+  padding: 0.9rem 1rem; border-bottom: 1px solid var(--border);
+  font-size: 0.88rem; vertical-align: middle;
+}
+.requests-table tr:hover td { background: rgba(37,99,235,0.04); }
+.tbl-btn { background: none; border: 1px solid var(--border); color: var(--text-secondary); padding: 0.3rem 0.6rem; border-radius: 6px; cursor: pointer; font-size: 0.75rem; transition: all var(--transition); }
+.tbl-btn:hover { border-color: var(--blue-accent); color: var(--blue-light); }
+.tbl-btn.danger:hover { border-color: #ef4444; color: #ef4444; }
+.no-requests { text-align: center; padding: 3rem; color: var(--text-secondary); }
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--surface2); border-top: 1px solid var(--border);
+  padding: 4rem 2rem 2rem;
+}
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; max-width: 1200px; margin: 0 auto; margin-bottom: 3rem; }
+.footer-brand { }
+.footer-logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; font-weight: 700; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.8rem; }
+.footer-tagline { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; max-width: 240px; }
+.footer-col h4 { font-weight: 700; font-size: 0.9rem; margin-bottom: 1rem; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.footer-col ul a { color: var(--text-secondary); text-decoration: none; font-size: 0.88rem; transition: color var(--transition); }
+.footer-col ul a:hover { color: var(--blue-light); }
+.footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-size: 0.83rem; color: var(--text-secondary); flex-wrap: wrap; gap: 1rem; }
+.footer-bottom span { cursor: pointer; } .footer-bottom span:hover { color: var(--blue-light); }
+
+/* ===== TOAST ===== */
+.toast {
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 9999;
+  background: var(--surface); border: 1px solid rgba(37,99,235,0.3);
+  border-radius: 12px; padding: 1rem 1.5rem; display: flex; align-items: center; gap: 0.8rem;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3); transform: translateY(100px); opacity: 0;
+  transition: all 0.4s; font-size: 0.9rem; max-width: 340px;
+}
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast i { font-size: 1.2rem; }
+.toast.success i { color: #22c55e; }
+.toast.error i { color: #ef4444; }
+
+/* ===== MODAL ===== */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 3000;
+  background: rgba(0,0,0,0.7); backdrop-filter: blur(5px);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity var(--transition);
+}
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 24px; padding: 2.5rem; max-width: 600px; width: 90%;
+  max-height: 80vh; overflow-y: auto;
+  transform: scale(0.9); transition: transform var(--transition);
+}
+.modal-overlay.open .modal { transform: scale(1); }
+.modal-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 1.5rem; }
+.modal-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; font-weight: 700; }
+.modal-close { background: none; border: none; color: var(--text-secondary); font-size: 1.3rem; cursor: pointer; transition: color var(--transition); }
+.modal-close:hover { color: var(--text-primary); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 3rem; }
+  .hero-desc { margin: 0 auto 2.5rem; }
+  .hero-btns { justify-content: center; }
+  .hero-stats { justify-content: center; }
+  .hero-visual { order: -1; }
+  .about-grid { grid-template-columns: 1fr; }
+  .about-photo-box { position: static; }
+  .quote-grid, .contact-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .admin-stats { grid-template-columns: 1fr 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .nav-links { display: none; }
+  .nav-links.open { display: flex; flex-direction: column; position: fixed; top: 70px; left: 0; right: 0; background: var(--surface); border-bottom: 1px solid var(--border); padding: 1rem; gap: 0.3rem; z-index: 999; }
+  .hamburger { display: block; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .services-grid { grid-template-columns: 1fr; }
+  .photo-frame { width: 260px; height: 310px; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .admin-stats { grid-template-columns: 1fr 1fr; }
+  .checkbox-group { grid-template-columns: 1fr; }
+  .quote-meta { grid-template-columns: 1fr 1fr; }
+}
+
+/* ===== ANIMATIONS ===== */
+.fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s, transform 0.6s; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.fade-up:nth-child(2) { transition-delay: 0.1s; }
+.fade-up:nth-child(3) { transition-delay: 0.2s; }
+.fade-up:nth-child(4) { transition-delay: 0.3s; }
+.fade-up:nth-child(5) { transition-delay: 0.4s; }
+.fade-up:nth-child(6) { transition-delay: 0.5s; }
+
+/* Color tokens per project */
+.p-color-1 { background: linear-gradient(135deg, #0f4c75, #1b6ca8); }
+.p-color-2 { background: linear-gradient(135deg, #1a1a2e, #16213e); }
+.p-color-3 { background: linear-gradient(135deg, #2d1b69, #11998e); }
+.p-color-4 { background: linear-gradient(135deg, #1f3c88, #374785); }
+.p-color-5 { background: linear-gradient(135deg, #2563eb, #7c3aed); }
+.p-color-6 { background: linear-gradient(135deg, #064e3b, #065f46); }
+.p-color-7 { background: linear-gradient(135deg, #7c2d12, #b91c1c); }
+
+/* Scroll progress */
+.scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--gradient); z-index: 2000; width: 0%; transition: width 0.1s; }
+
+/* Back to top */
+.back-top {
+  position: fixed; bottom: 2rem; left: 2rem; z-index: 500;
+  width: 44px; height: 44px; background: var(--gradient); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  box-shadow: 0 4px 15px rgba(37,99,235,0.4); opacity: 0; transition: all var(--transition);
+  border: none; color: white; font-size: 1rem;
+}
+.back-top.show { opacity: 1; }
+.back-top:hover { transform: translateY(-3px); }
+
+/* RTL for Arabic */
+[data-lang="ar"] { direction: rtl; }
+[data-lang="ar"] .nav-actions { flex-direction: row-reverse; }
+[data-lang="ar"] .toast { right: auto; left: 2rem; }
+[data-lang="ar"] .back-top { left: auto; right: 2rem; }
+
+/* Preloader */
+#preloader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--blue-dark); display: flex; align-items: center; justify-content: center;
+  transition: opacity 0.5s;
+}
+#preloader.fade { opacity: 0; pointer-events: none; }
+.loader-ring {
+  width: 60px; height: 60px; border-radius: 50%;
+  border: 3px solid var(--border); border-top-color: var(--blue-accent);
+  animation: spin 0.8s linear infinite;
+}
+</style>
+</head>
+<body>
+
+<!-- Preloader -->
+<div id="preloader"><div class="loader-ring"></div></div>
+
+<!-- Scroll Progress -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#home" class="nav-logo">Hanaa<span style="color:var(--purple-light)">.</span>Dev</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home" data-i18n="nav.home">Home</a></li>
+    <li><a href="#about" data-i18n="nav.about">About</a></li>
+    <li><a href="#portfolio" data-i18n="nav.portfolio">Portfolio</a></li>
+    <li><a href="#services" data-i18n="nav.services">Services</a></li>
+    <li><a href="#quote" data-i18n="nav.quote">Get Quote</a></li>
+    <li><a href="#testimonials" data-i18n="nav.testimonials">Reviews</a></li>
+    <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="lang-btn" id="langBtn">EN</button>
+    <button class="theme-btn" id="themeBtn"><i class="fa fa-sun"></i></button>
+    <button class="hamburger" id="hamburger"><i class="fa fa-bars"></i></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid container">
+    <div class="hero-content">
+      <div class="hero-badge"><span data-i18n="hero.badge">Available for Projects</span></div>
+      <h1 class="hero-name"><span>Zigh Hanaa</span></h1>
+      <p class="hero-title" data-i18n="hero.title">Software Developer & Information Systems Engineer</p>
+      <p class="hero-desc" data-i18n="hero.desc">Building elegant digital solutions — from intelligent web platforms to mobile apps and AI-powered systems that drive real business impact.</p>
+      <div class="hero-btns">
+        <a href="#portfolio" class="btn btn-primary"><i class="fa fa-briefcase"></i> <span data-i18n="hero.btn1">View Projects</span></a>
+        <a href="#quote" class="btn btn-outline"><i class="fa fa-calculator"></i> <span data-i18n="hero.btn2">Request a Service</span></a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">7+</div><div class="stat-label" data-i18n="stat.projects">Projects</div></div>
+        <div class="stat"><div class="stat-num">3+</div><div class="stat-label" data-i18n="stat.years">Years Exp.</div></div>
+        <div class="stat"><div class="stat-num">10+</div><div class="stat-label" data-i18n="stat.skills">Technologies</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="orbit-ring"></div>
+      <div class="orbit-ring"></div>
+      <div class="photo-frame">
+        <div class="photo-avatar">👩‍💻</div>
+        <div class="photo-name-tag">Zigh Hanaa</div>
+        <div class="tech-float">🎯 Dart</div>
+        <div class="tech-float">🐍 Python</div>
+        <div class="tech-float">📱 Flutter</div>
+        <div class="tech-float">🌐 HTML</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow" data-i18n="about.eyebrow">Who I Am</div>
+      <h2 class="section-title" data-i18n="about.title">About <span>Me</span></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-photo-box fade-up">
+        <div class="about-avatar">👩‍💻</div>
+        <div class="about-name">Zigh Hanaa</div>
+        <div class="about-role" data-i18n="about.role">Software Developer & IT Engineer</div>
+        <div class="about-tags">
+          <span class="about-tag">🇩🇿 Algeria</span>
+          <span class="about-tag">💼 Freelancer</span>
+          <span class="about-tag">🎓 Master 2 CYSIA</span>
+          <span class="about-tag">📸 @inova_dart</span>
+        </div>
+      </div>
+      <div class="fade-up">
+        <p class="about-bio" data-i18n="about.bio">Hi! I'm Zigh Hanaa, a passionate Software Developer and Information Systems Engineer based in Algeria. I hold a Master 2 in CYSIA (2026) and I've completed additional training in Design Thinking and Business Model design. I specialize in crafting full-stack digital solutions — from dynamic web platforms and responsive mobile applications to sophisticated AI integrations and database architectures. I believe technology should be both powerful and beautiful, and I bring that philosophy to every project I build. You can also find my work on Instagram as @inova_dart.</p>
+        <div class="skills-section">
+          <h3 data-i18n="about.skills">Technical Skills</h3>
+          <div class="skills-grid">
+            <div class="skill-chip"><i class="fab fa-html5"></i> HTML5 / CSS3</div>
+            <div class="skill-chip"><i class="fab fa-js"></i> JavaScript</div>
+            <div class="skill-chip"><i class="fab fa-php"></i> PHP</div>
+            <div class="skill-chip"><i class="fab fa-python"></i> Python</div>
+            <div class="skill-chip"><i class="fab fa-java"></i> Java</div>
+            <div class="skill-chip"><i class="fa fa-mobile-alt"></i> Dart / Flutter</div>
+            <div class="skill-chip"><i class="fa fa-database"></i> SQL</div>
+            <div class="skill-chip"><i class="fa fa-brain"></i> Machine Learning</div>
+            <div class="skill-chip"><i class="fa fa-robot"></i> Artificial Intelligence</div>
+            <div class="skill-chip"><i class="fa fa-lightbulb"></i> Design Thinking</div>
+            <div class="skill-chip"><i class="fa fa-briefcase"></i> Business Model</div>
+            <div class="skill-chip"><i class="fab fa-git-alt"></i> Git / GitHub</div>
+            <div class="skill-chip"><i class="fa fa-server"></i> REST APIs</div>
+            <div class="skill-chip"><i class="fab fa-linux"></i> Linux</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow" data-i18n="portfolio.eyebrow">My Work</div>
+      <h2 class="section-title" data-i18n="portfolio.title">Featured <span>Projects</span></h2>
+      <p class="section-sub" data-i18n="portfolio.sub">A selection of projects I've built — from health platforms to AI-powered systems.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="projects-grid" id="projectsGrid">
+
+      <div class="project-card fade-up">
+        <div class="project-img p-color-1"><span style="z-index:1;position:relative">🏥</span></div>
+        <div class="project-body">
+          <div class="project-title" data-i18n="proj1.name">Sihaty DZ — Digital Health Platform 🏆</div>
+          <div class="project-desc" data-i18n="proj1.desc">A comprehensive digital health platform enabling Algerian patients to book appointments, access medical records, and connect with healthcare professionals online. This project was awarded an official Label for its impact and quality.</div>
+          <div class="project-techs">
+            <span class="tech-tag">PHP</span><span class="tech-tag">MySQL</span><span class="tech-tag">JavaScript</span><span class="tech-tag">Bootstrap</span>
+          </div>
+          <div class="project-btns">
+            <button class="btn-sm outline" onclick="openProjectModal(0)"><i class="fa fa-info-circle"></i> <span data-i18n="btn.details">Details</span></button>
+            <button class="btn-sm primary"><i class="fa fa-external-link-alt"></i> <span data-i18n="btn.demo">Live Demo</span></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-img p-color-7"><span style="z-index:1;position:relative">🩺</span></div>
+        <div class="project-body">
+          <div class="project-title" data-i18n="proj7.name">MyRein — Dialysis Patient Companion App</div>
+          <div class="project-desc" data-i18n="proj7.desc">A mobile application dedicated to patients with kidney disease undergoing dialysis, allowing them to record and track essential medical information — dialysis sessions, medications, lab results, diet and appointment reminders.</div>
+          <div class="project-techs">
+            <span class="tech-tag">Flutter</span><span class="tech-tag">Dart</span><span class="tech-tag">Firebase</span><span class="tech-tag">REST API</span>
+          </div>
+          <div class="project-btns">
+            <button class="btn-sm outline" onclick="openProjectModal(6)"><i class="fa fa-info-circle"></i> <span data-i18n="btn.details">Details</span></button>
+            <button class="btn-sm primary"><i class="fa fa-external-link-alt"></i> <span data-i18n="btn.demo">Demo</span></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-img p-color-2"><span style="z-index:1;position:relative">👁️</span></div>
+        <div class="project-body">
+          <div class="project-title" data-i18n="proj2.name">Attendance System — Facial Recognition</div>
+          <div class="project-desc" data-i18n="proj2.desc">University attendance management using real-time facial recognition technology, reducing manual work and increasing accuracy for professors and students.</div>
+          <div class="project-techs">
+            <span class="tech-tag">Python</span><span class="tech-tag">OpenCV</span><span class="tech-tag">TensorFlow</span><span class="tech-tag">SQLite</span>
+          </div>
+          <div class="project-btns">
+            <button class="btn-sm outline" onclick="openProjectModal(1)"><i class="fa fa-info-circle"></i> <span data-i18n="btn.details">Details</span></button>
+            <button class="btn-sm primary"><i class="fab fa-github"></i> <span data-i18n="btn.code">View Code</span></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-img p-color-3"><span style="z-index:1;position:relative">🍽️</span></div>
+        <div class="project-body">
+          <div class="project-title" data-i18n="proj3.name">Restaurant Management Application</div>
+          <div class="project-desc" data-i18n="proj3.desc">Full-featured desktop application for restaurant operations — order management, inventory tracking, billing, staff management and detailed analytics.</div>
+          <div class="project-techs">
+            <span class="tech-tag">Java</span><span class="tech-tag">JavaFX</span><span class="tech-tag">MySQL</span><span class="tech-tag">JasperReports</span>
+          </div>
+          <div class="project-btns">
+            <button class="btn-sm outline" onclick="openProjectModal(2)"><i class="fa fa-info-circle"></i> <span data-i18n="btn.details">Details</span></button>
+            <button class="btn-sm primary"><i class="fa fa-download"></i> <span data-i18n="btn.demo">Demo</span></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-img p-color-4"><span style="z-index:1;position:relative">💬</span></div>
+        <div class="project-body">
+          <div class="project-title" data-i18n="proj4.name">Chat App — Messenger-Style Messaging</div>
+          <div class="project-desc" data-i18n="proj4.desc">Real-time multi-user chat application inspired by Messenger, supporting private conversations, group rooms, file sharing and user authentication.</div>
+          <div class="project-techs">
+            <span class="tech-tag">Java</span><span class="tech-tag">Sockets</span><span class="tech-tag">Swing GUI</span><span class="tech-tag">Multithreading</span>
+          </div>
+          <div class="project-btns">
+            <button class="btn-sm outline" onclick="openProjectModal(3)"><i class="fa fa-info-circle"></i> <span data-i18n="btn.details">Details</span></button>
+            <button class="btn-sm primary"><i class="fab fa-github"></i> <span data-i18n="btn.code">View Code</span></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-img p-color-5"><span style="z-index:1;position:relative">🛒</span></div>
+        <div class="project-body">
+          <div class="project-title" data-i18n="proj5.name">E-Commerce Websites</div>
+          <div class="project-desc" data-i18n="proj5.desc">Multiple custom e-commerce solutions with product management, shopping cart, secure payment gateways, order tracking and admin dashboards.</div>
+          <div class="project-techs">
+            <span class="tech-tag">PHP</span><span class="tech-tag">Laravel</span><span class="tech-tag">MySQL</span><span class="tech-tag">Stripe</span><span class="tech-tag">Vue.js</span>
+          </div>
+          <div class="project-btns">
+            <button class="btn-sm outline" onclick="openProjectModal(4)"><i class="fa fa-info-circle"></i> <span data-i18n="btn.details">Details</span></button>
+            <button class="btn-sm primary"><i class="fa fa-external-link-alt"></i> <span data-i18n="btn.demo">Live Demo</span></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-img p-color-6"><span style="z-index:1;position:relative">📱</span></div>
+        <div class="project-body">
+          <div class="project-title" data-i18n="proj6.name">Custom Mobile Applications</div>
+          <div class="project-desc" data-i18n="proj6.desc">Cross-platform mobile apps built with Flutter, delivering smooth native-like experiences for iOS and Android with beautiful UI and backend integration.</div>
+          <div class="project-techs">
+            <span class="tech-tag">Flutter</span><span class="tech-tag">Dart</span><span class="tech-tag">Firebase</span><span class="tech-tag">REST API</span>
+          </div>
+          <div class="project-btns">
+            <button class="btn-sm outline" onclick="openProjectModal(5)"><i class="fa fa-info-circle"></i> <span data-i18n="btn.details">Details</span></button>
+            <button class="btn-sm primary"><i class="fa fa-external-link-alt"></i> <span data-i18n="btn.demo">Demo</span></button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow" data-i18n="services.eyebrow">What I Offer</div>
+      <h2 class="section-title" data-i18n="services.title">My <span>Services</span></h2>
+      <p class="section-sub" data-i18n="services.sub">Professional development services tailored to your business goals and budget.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="services-grid">
+      <div class="service-card fade-up">
+        <div class="service-icon">🎯</div>
+        <div class="service-name" data-i18n="svc1.name">Landing Page</div>
+        <div class="service-desc" data-i18n="svc1.desc">High-converting landing pages designed to capture leads and showcase your brand professionally.</div>
+        <span class="service-price" data-i18n="svc1.price">From 26,000 DA</span>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">💼</div>
+        <div class="service-name" data-i18n="svc2.name">Business Website</div>
+        <div class="service-desc" data-i18n="svc2.desc">Multi-page professional websites for companies, portfolios, and service-based businesses.</div>
+        <span class="service-price" data-i18n="svc2.price">From 26,000 DA</span>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">🛒</div>
+        <div class="service-name" data-i18n="svc3.name">E-Commerce Website</div>
+        <div class="service-desc" data-i18n="svc3.desc">Full-featured online stores with payment integration, inventory management, and admin panel.</div>
+        <span class="service-price" data-i18n="svc3.price">From 39,000 DA</span>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">📱</div>
+        <div class="service-name" data-i18n="svc4.name">Mobile Application</div>
+        <div class="service-desc" data-i18n="svc4.desc">Cross-platform iOS & Android apps built with Flutter for smooth, native-like performance.</div>
+        <span class="service-price" data-i18n="svc4.price">From 65,000 DA</span>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">🖥️</div>
+        <div class="service-name" data-i18n="svc5.name">Desktop Application</div>
+        <div class="service-desc" data-i18n="svc5.desc">Powerful desktop software for Windows/Linux using Java, Python, or other modern stacks.</div>
+        <span class="service-price" data-i18n="svc5.price">From 39,000 DA</span>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">🗄️</div>
+        <div class="service-name" data-i18n="svc6.name">Database Design</div>
+        <div class="service-desc" data-i18n="svc6.desc">Optimized relational and NoSQL database architecture, design, and performance tuning.</div>
+        <span class="service-price" data-i18n="svc6.price">From 13,000 DA</span>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">🤖</div>
+        <div class="service-name" data-i18n="svc7.name">AI Integration</div>
+        <div class="service-desc" data-i18n="svc7.desc">Integrate machine learning models, chatbots, computer vision, or NLP into your existing systems.</div>
+        <span class="service-price" data-i18n="svc7.price">From 26,000 DA</span>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">🔧</div>
+        <div class="service-name" data-i18n="svc8.name">Maintenance & Support</div>
+        <div class="service-desc" data-i18n="svc8.desc">Ongoing support, bug fixes, updates and performance optimization for your applications.</div>
+        <span class="service-price" data-i18n="svc8.price">From 6,500 DA/mo</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTATION -->
+<section id="quote">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow" data-i18n="quote.eyebrow">Instant Estimate</div>
+      <h2 class="section-title" data-i18n="quote.title">Get a <span>Free Quote</span></h2>
+      <p class="section-sub" data-i18n="quote.sub">Fill in your project details and get an instant price estimate with timeline.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="quote-grid">
+      <div class="quote-form-box">
+        <div class="form-title"><i class="fa fa-file-invoice"></i> <span data-i18n="quote.formtitle">Project Details</span></div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label data-i18n="form.name">Full Name *</label>
+            <input type="text" id="qName" placeholder="Zigh Hanaa">
+          </div>
+          <div class="form-group">
+            <label data-i18n="form.email">Email *</label>
+            <input type="email" id="qEmail" placeholder="hanaa@email.com">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label data-i18n="form.phone">Phone</label>
+            <input type="tel" id="qPhone" placeholder="+213 ...">
+          </div>
+          <div class="form-group">
+            <label data-i18n="form.company">Company Name</label>
+            <input type="text" id="qCompany" placeholder="My Company">
+          </div>
+        </div>
+        <div class="form-group">
+          <label data-i18n="form.service">Service Type *</label>
+          <select id="qService">
+            <option value="" data-i18n="form.select">-- Select a service --</option>
+            <option value="landing" data-i18n="opt.landing">Landing Page</option>
+            <option value="business" data-i18n="opt.business">Business Website</option>
+            <option value="ecommerce" data-i18n="opt.ecommerce">E-Commerce Website</option>
+            <option value="mobile" data-i18n="opt.mobile">Mobile Application</option>
+            <option value="desktop" data-i18n="opt.desktop">Desktop Application</option>
+            <option value="ai" data-i18n="opt.ai">AI Integration</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label data-i18n="form.desc">Project Description *</label>
+          <textarea id="qDesc" placeholder="Describe your project idea, goals, and any specific requirements..."></textarea>
+        </div>
+        <div class="form-group">
+          <label data-i18n="form.pages">Number of Pages / Screens</label>
+          <input type="number" id="qPages" min="1" max="100" value="5">
+        </div>
+        <div class="form-group">
+          <label data-i18n="form.features">Required Features</label>
+          <div class="checkbox-group">
+            <label class="checkbox-item"><input type="checkbox" id="fMobile"> <span data-i18n="feat.mobile">📱 Mobile App Version</span></label>
+            <label class="checkbox-item"><input type="checkbox" id="fDatabase"> <span data-i18n="feat.db">🗄️ Database</span></label>
+            <label class="checkbox-item"><input type="checkbox" id="fAuth"> <span data-i18n="feat.auth">🔐 User Authentication</span></label>
+            <label class="checkbox-item"><input type="checkbox" id="fPayment"> <span data-i18n="feat.payment">💳 Payment System</span></label>
+            <label class="checkbox-item"><input type="checkbox" id="fAI"> <span data-i18n="feat.ai">🤖 AI Features</span></label>
+            <label class="checkbox-item"><input type="checkbox" id="fAdmin"> <span data-i18n="feat.admin">⚙️ Admin Dashboard</span></label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label data-i18n="form.deadline">Project Deadline</label>
+          <input type="date" id="qDeadline">
+        </div>
+        <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="calculateQuote()" data-i18n="btn.calculate">
+          <i class="fa fa-calculator"></i> Calculate My Quote
+        </button>
+      </div>
+
+      <div class="quote-result-box">
+        <div class="quote-placeholder" id="quotePlaceholder">
+          <i class="fa fa-calculator"></i>
+          <p data-i18n="quote.empty">Fill in the form and click Calculate to see your instant quote.</p>
+        </div>
+        <div class="quote-result" id="quoteResult">
+          <div class="form-title"><i class="fa fa-file-contract"></i> <span data-i18n="quote.summary">Your Quotation Summary</span></div>
+          <div class="quote-total">
+            <div class="quote-label" data-i18n="quote.estimated">Estimated Budget</div>
+            <div class="quote-amount" id="qTotal">0 DA</div>
+            <div class="quote-label" style="margin-top:0.3rem" id="qTotalNote"></div>
+          </div>
+          <div class="quote-meta">
+            <div class="quote-meta-item">
+              <div class="meta-val" id="qTimeline">—</div>
+              <div class="meta-key" data-i18n="quote.timeline">Dev Timeline</div>
+            </div>
+            <div class="quote-meta-item">
+              <div class="meta-val" id="qComplexity">—</div>
+              <div class="meta-key" data-i18n="quote.complexity">Complexity</div>
+            </div>
+          </div>
+          <div class="quote-breakdown" id="qBreakdown"></div>
+          <div style="display:flex;gap:0.8rem;flex-wrap:wrap">
+            <button class="btn btn-primary" style="flex:1;justify-content:center" onclick="saveQuoteRequest()" data-i18n="btn.send"><i class="fa fa-paper-plane"></i> Send Request</button>
+            <button class="btn btn-outline" style="flex:1;justify-content:center" onclick="exportQuotePDF()" data-i18n="btn.pdf"><i class="fa fa-download"></i> Export PDF</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow" data-i18n="test.eyebrow">Client Reviews</div>
+      <h2 class="section-title" data-i18n="test.title">What Clients <span>Say</span></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card fade-up">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text" data-i18n="rev1.text">"Hanaa delivered our health platform beyond expectations. Professional, communicative, and technically excellent. The system handles thousands of users flawlessly."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">👨‍⚕️</div>
+          <div><div class="author-name">Dr. Karim Benali</div><div class="author-role" data-i18n="rev1.role">Medical Director, Sihaty DZ</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-up">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text" data-i18n="rev2.text">"The facial recognition attendance system transformed how we manage our university. Incredibly accurate and the UI is very intuitive for both faculty and students."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">👩‍🏫</div>
+          <div><div class="author-name">Prof. Amina Khelif</div><div class="author-role" data-i18n="rev2.role">University Department Head</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-up">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text" data-i18n="rev3.text">"Our restaurant management app is a game changer. Staff love it, management has full visibility, and our efficiency improved by 40%. Highly recommend Hanaa!"</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">👨‍🍳</div>
+          <div><div class="author-name">Youssef Amrani</div><div class="author-role" data-i18n="rev3.role">Restaurant Owner, Ain Temouchent</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-up">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text" data-i18n="rev4.text">"Fantastic mobile app! She understood our vision perfectly and delivered a beautiful, fast Flutter app on time and within budget. Will work with her again."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">👩‍💼</div>
+          <div><div class="author-name">Sarah Messaoud</div><div class="author-role" data-i18n="rev4.role">Startup Founder, Algiers</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow" data-i18n="contact.eyebrow">Get In Touch</div>
+      <h2 class="section-title" data-i18n="contact.title">Let's <span>Work Together</span></h2>
+      <p class="section-sub" data-i18n="contact.sub">Have a project in mind? Let's talk about how I can help bring your vision to life.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="contact-grid">
+      <div class="fade-up">
+        <h3 data-i18n="contact.h3">Connect with me</h3>
+        <p data-i18n="contact.p">I'm always open to new opportunities and interesting projects. Whether you have a question, a project idea, or just want to say hello — my inbox is always open!</p>
+        <div class="social-links">
+          <a href="https://wa.me/213675400136" class="social-btn whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+          <a href="mailto:inovadartdz@gmail.com" class="social-btn email"><i class="fa fa-envelope"></i> Email</a>
+          <a href="https://instagram.com/inova_dart" class="social-btn instagram" target="_blank"><i class="fab fa-instagram"></i> @inova_dart</a>
+          <a href="https://github.com/hanaazigh" class="social-btn github" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+        </div>
+        <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-top:1rem">
+          <p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:0.5rem" data-i18n="contact.location">📍 Location</p>
+          <p style="font-weight:600">Ain Temouchent, Algeria 🇩🇿</p>
+          <p style="font-size:0.85rem;color:var(--text-secondary);margin:0.8rem 0 0.3rem" data-i18n="contact.avail">⏱ Availability</p>
+          <p style="font-weight:600" data-i18n="contact.availval">Available for remote & local projects</p>
+        </div>
+      </div>
+      <div class="contact-form-box fade-up">
+        <div class="form-title"><i class="fa fa-paper-plane"></i> <span data-i18n="contact.formtitle">Send a Message</span></div>
+        <div class="form-row">
+          <div class="form-group">
+            <label data-i18n="form.name">Full Name *</label>
+            <input type="text" id="cName" placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label data-i18n="form.email">Email *</label>
+            <input type="email" id="cEmail" placeholder="your@email.com">
+          </div>
+        </div>
+        <div class="form-group">
+          <label data-i18n="form.subject">Subject *</label>
+          <input type="text" id="cSubject" placeholder="Project inquiry...">
+        </div>
+        <div class="form-group">
+          <label data-i18n="form.message">Message *</label>
+          <textarea id="cMessage" style="min-height:140px" placeholder="Tell me about your project..."></textarea>
+        </div>
+        <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="sendContact()" data-i18n="btn.sendmsg">
+          <i class="fa fa-paper-plane"></i> Send Message
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo">Hanaa<span style="color:var(--purple-light)">.</span>Dev</div>
+      <p class="footer-tagline" data-i18n="footer.tagline">Building elegant digital solutions that drive real business results.</p>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="footer.nav">Navigation</h4>
+      <ul>
+        <li><a href="#home" data-i18n="nav.home">Home</a></li>
+        <li><a href="#about" data-i18n="nav.about">About</a></li>
+        <li><a href="#portfolio" data-i18n="nav.portfolio">Portfolio</a></li>
+        <li><a href="#services" data-i18n="nav.services">Services</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="footer.services">Services</h4>
+      <ul>
+        <li><a href="#services" data-i18n="opt.landing">Landing Page</a></li>
+        <li><a href="#services" data-i18n="opt.ecommerce">E-Commerce</a></li>
+        <li><a href="#services" data-i18n="opt.mobile">Mobile App</a></li>
+        <li><a href="#services" data-i18n="opt.ai">AI Integration</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="footer.contact">Contact</h4>
+      <ul>
+        <li><a href="mailto:inovadartdz@gmail.com">inovadartdz@gmail.com</a></li>
+        <li><a href="https://wa.me/213675400136">WhatsApp</a></li>
+        <li><a href="https://instagram.com/inova_dart">Instagram @inova_dart</a></li>
+        <li><a href="https://github.com/hanaazigh">GitHub</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Hanaa Dev Solutions. <span data-i18n="footer.rights">All rights reserved.</span></span>
+    </div>
+</footer>
+
+<!-- ADMIN PANEL -->
+<div id="admin">
+  <div class="admin-header">
+    <h2><i class="fa fa-shield-alt" style="color:var(--blue-accent);margin-right:0.5rem"></i> <span data-i18n="admin.title">Admin Dashboard</span></h2>
+    <div style="display:flex;gap:0.8rem;align-items:center">
+      <button class="btn btn-outline" onclick="exportAllPDF()" style="font-size:0.85rem;padding:0.5rem 1rem"><i class="fa fa-download"></i> Export All</button>
+      <button class="btn btn-outline" onclick="closeAdmin()" style="font-size:0.85rem;padding:0.5rem 1rem"><i class="fa fa-times"></i> <span data-i18n="admin.close">Close</span></button>
+    </div>
+  </div>
+  <div class="admin-body">
+    <div class="admin-stats" id="adminStats">
+      <div class="admin-stat-card"><div class="num" id="statTotal">0</div><div class="label" data-i18n="admin.total">Total Requests</div></div>
+      <div class="admin-stat-card"><div class="num" id="statAvg">0 DA</div><div class="label" data-i18n="admin.avg">Avg. Quote</div></div>
+      <div class="admin-stat-card"><div class="num" id="statHigh">0</div><div class="label" data-i18n="admin.high">High Complexity</div></div>
+      <div class="admin-stat-card"><div class="num" id="statServices">—</div><div class="label" data-i18n="admin.top">Top Service</div></div>
+    </div>
+    <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:16px;overflow:hidden">
+      <div style="padding:1.2rem 1.5rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center">
+        <h3 style="font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:700" data-i18n="admin.requests">Service Requests</h3>
+        <button class="btn btn-outline" onclick="clearAllRequests()" style="font-size:0.8rem;padding:0.4rem 0.8rem;color:#ef4444;border-color:#ef4444"><i class="fa fa-trash"></i> Clear All</button>
+      </div>
+      <div class="requests-table-wrap">
+        <table class="requests-table">
+          <thead>
+            <tr>
+              <th>#</th><th data-i18n="th.name">Name</th><th data-i18n="th.email">Email</th>
+              <th data-i18n="th.service">Service</th><th data-i18n="th.quote">Quote</th>
+              <th data-i18n="th.complexity">Complexity</th><th data-i18n="th.date">Date</th>
+              <th data-i18n="th.actions">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="requestsTableBody"></tbody>
+        </table>
+        <div id="noRequests" class="no-requests" style="display:none">
+          <i class="fa fa-inbox" style="font-size:2rem;margin-bottom:0.8rem;display:block;color:var(--border)"></i>
+          <span data-i18n="admin.empty">No requests yet. They'll appear here when clients submit the form.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECT MODAL -->
+<div class="modal-overlay" id="projectModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title" id="modalTitle"></h2>
+      <button class="modal-close" onclick="closeModal('projectModal')"><i class="fa fa-times"></i></button>
+    </div>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <i class="fa fa-check-circle"></i>
+  <span id="toastMsg"></span>
+</div>
+
+<!-- BACK TO TOP -->
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fa fa-arrow-up"></i></button>
+
+<script>
+// ============================
+// TRANSLATIONS
+// ============================
+const i18n = {
+  en: {
+    'nav.home':'Home','nav.about':'About','nav.portfolio':'Portfolio',
+    'nav.services':'Services','nav.quote':'Get Quote','nav.testimonials':'Reviews','nav.contact':'Contact',
+    'hero.badge':'Available for Projects','hero.title':'Software Developer & Information Systems Engineer',
+    'hero.desc':'Building elegant digital solutions — from intelligent web platforms to mobile apps and AI-powered systems that drive real business impact.',
+    'hero.btn1':'View Projects','hero.btn2':'Request a Service',
+    'stat.projects':'Projects','stat.years':'Years Exp.','stat.skills':'Technologies',
+    'about.eyebrow':'Who I Am','about.title':'About Me',
+    'about.role':'Software Developer & IT Engineer',
+    'about.bio':"Hi! I'm Zigh Hanaa, a passionate Software Developer and Information Systems Engineer based in Algeria. I hold a Master 2 in CYSIA (2026) and completed training in Design Thinking and Business Model design. I specialize in crafting full-stack digital solutions — from dynamic web platforms and responsive mobile applications to sophisticated AI integrations and database architectures. Find me on Instagram: @inova_dart.",
+    'about.skills':'Technical Skills',
+    'portfolio.eyebrow':'My Work','portfolio.title':'Featured Projects',
+    'portfolio.sub':'A selection of projects I\'ve built — from health platforms to AI-powered systems.',
+    'proj1.name':'Sihaty DZ — Digital Health Platform 🏆',
+    'proj1.desc':'A comprehensive digital health platform enabling Algerian patients to book appointments, access medical records, and connect with healthcare professionals online. Awarded an official Label for its impact and quality.',
+    'proj7.name':'MyRein — Dialysis Patient Companion App',
+    'proj7.desc':'A mobile application dedicated to patients with kidney disease undergoing dialysis, allowing them to record and track essential medical information — dialysis sessions, medications, lab results, diet and appointment reminders.',
+    'proj2.name':'Attendance System — Facial Recognition',
+    'proj2.desc':'University attendance management using real-time facial recognition technology, reducing manual work and increasing accuracy.',
+    'proj3.name':'Restaurant Management Application',
+    'proj3.desc':'Full-featured desktop application for restaurant operations — orders, inventory, billing, staff and analytics.',
+    'proj4.name':'Chat App — Messenger-Style Messaging',
+    'proj4.desc':'Real-time multi-user chat application inspired by Messenger, supporting private conversations, group rooms, and file sharing.',
+    'proj5.name':'E-Commerce Websites',
+    'proj5.desc':'Custom e-commerce solutions with product management, shopping cart, payment gateways, and admin dashboards.',
+    'proj6.name':'Custom Mobile Applications','proj6.desc':'Cross-platform mobile apps built with Flutter, delivering smooth native-like experiences for iOS and Android.',
+    'btn.details':'Details','btn.demo':'Live Demo','btn.code':'View Code',
+    'services.eyebrow':'What I Offer','services.title':'My Services',
+    'services.sub':'Professional development services tailored to your business goals and budget.',
+    'svc1.name':'Landing Page','svc1.desc':'High-converting landing pages designed to capture leads and showcase your brand.','svc1.price':'From 26,000 DA',
+    'svc2.name':'Business Website','svc2.desc':'Multi-page professional websites for companies and service-based businesses.','svc2.price':'From 26,000 DA',
+    'svc3.name':'E-Commerce Website','svc3.desc':'Full-featured online stores with payment integration and admin panel.','svc3.price':'From 39,000 DA',
+    'svc4.name':'Mobile Application','svc4.desc':'Cross-platform iOS & Android apps built with Flutter.','svc4.price':'From 65,000 DA',
+    'svc5.name':'Desktop Application','svc5.desc':'Powerful desktop software for Windows/Linux.','svc5.price':'From 39,000 DA',
+    'svc6.name':'Database Design','svc6.desc':'Optimized relational and NoSQL database architecture.','svc6.price':'From 13,000 DA',
+    'svc7.name':'AI Integration','svc7.desc':'Integrate ML models, chatbots, computer vision into your systems.','svc7.price':'From 26,000 DA',
+    'svc8.name':'Maintenance & Support','svc8.desc':'Ongoing support, bug fixes, and performance optimization.','svc8.price':'From 6,500 DA/mo',
+    'quote.eyebrow':'Instant Estimate','quote.title':'Get a Free Quote',
+    'quote.sub':'Fill in your project details and get an instant price estimate with timeline.',
+    'quote.formtitle':'Project Details','quote.empty':'Fill in the form and click Calculate to see your instant quote.',
+    'quote.summary':'Your Quotation Summary','quote.estimated':'Estimated Budget',
+    'quote.timeline':'Dev Timeline','quote.complexity':'Complexity',
+    'form.name':'Full Name *','form.email':'Email *','form.phone':'Phone','form.company':'Company Name',
+    'form.service':'Service Type *','form.select':'-- Select a service --',
+    'opt.landing':'Landing Page','opt.business':'Business Website','opt.ecommerce':'E-Commerce Website',
+    'opt.mobile':'Mobile Application','opt.desktop':'Desktop Application','opt.ai':'AI Integration',
+    'form.desc':'Project Description *','form.pages':'Number of Pages / Screens','form.features':'Required Features',
+    'feat.mobile':'📱 Mobile App Version','feat.db':'🗄️ Database','feat.auth':'🔐 User Authentication',
+    'feat.payment':'💳 Payment System','feat.ai':'🤖 AI Features','feat.admin':'⚙️ Admin Dashboard',
+    'form.deadline':'Project Deadline','btn.calculate':'Calculate My Quote','btn.send':'Send Request',
+    'btn.pdf':'Export PDF',
+    'test.eyebrow':'Client Reviews','test.title':'What Clients Say',
+    'rev1.text':'"Hanaa delivered our health platform beyond expectations. Professional, communicative, and technically excellent."',
+    'rev1.role':'Medical Director, Sihaty DZ',
+    'rev2.text':'"The facial recognition attendance system transformed how we manage our university. Incredibly accurate and intuitive."',
+    'rev2.role':'University Department Head',
+    'rev3.text':'"Our restaurant app is a game changer. Efficiency improved by 40%. Highly recommend Hanaa!"',
+    'rev3.role':'Restaurant Owner, Ain Temouchent',
+    'rev4.text':'"Fantastic mobile app! She understood our vision and delivered on time and within budget."',
+    'rev4.role':'Startup Founder, Algiers',
+    'contact.eyebrow':'Get In Touch','contact.title':'Let\'s Work Together',
+    'contact.sub':'Have a project in mind? Let\'s talk about how I can help.',
+    'contact.h3':'Connect with me',
+    'contact.p':"I'm always open to new opportunities and interesting projects. My inbox is always open!",
+    'contact.location':'📍 Location','contact.avail':'⏱ Availability',
+    'contact.availval':'Available for remote & local projects',
+    'contact.formtitle':'Send a Message',
+    'form.subject':'Subject *','form.message':'Message *','btn.sendmsg':'Send Message',
+    'footer.tagline':'Building elegant digital solutions that drive real business results.',
+    'footer.nav':'Navigation','footer.services':'Services','footer.contact':'Contact',
+    'footer.rights':'All rights reserved.','footer.admin':'Admin Panel',
+    'admin.title':'Admin Dashboard','admin.close':'Close',
+    'admin.total':'Total Requests','admin.avg':'Avg. Quote','admin.high':'High Complexity','admin.top':'Top Service',
+    'admin.requests':'Service Requests','admin.empty':'No requests yet.',
+    'th.name':'Name','th.email':'Email','th.service':'Service','th.quote':'Quote',
+    'th.complexity':'Complexity','th.date':'Date','th.actions':'Actions',
+  },
+  fr: {
+    'nav.home':'Accueil','nav.about':'À propos','nav.portfolio':'Portfolio',
+    'nav.services':'Services','nav.quote':'Devis','nav.testimonials':'Avis','nav.contact':'Contact',
+    'hero.badge':'Disponible pour des projets','hero.title':'Développeuse Logiciel & Ingénieure en Systèmes d\'Information',
+    'hero.desc':'Création de solutions numériques élégantes — des plateformes web intelligentes aux applications mobiles et systèmes IA.',
+    'hero.btn1':'Voir les projets','hero.btn2':'Demander un service',
+    'stat.projects':'Projets','stat.years':'Ans d\'exp.','stat.skills':'Technologies',
+    'about.eyebrow':'Qui suis-je','about.title':'À propos de Moi',
+    'about.role':'Développeuse Logiciel & Ingénieure IT',
+    'about.bio':"Bonjour ! Je suis Zigh Hanaa, développeuse logiciel passionnée et ingénieure en systèmes d'information basée en Algérie. Je suis titulaire d'un Master 2 en CYSIA (2026) et j'ai suivi des formations en Design Thinking et en Business Model. Je me spécialise dans la création de solutions numériques complètes. Retrouvez-moi sur Instagram : @inova_dart.",
+    'about.skills':'Compétences Techniques',
+    'portfolio.eyebrow':'Mon Travail','portfolio.title':'Projets en vedette',
+    'portfolio.sub':'Une sélection de projets que j\'ai réalisés.',
+    'proj1.name':'Sihaty DZ — Plateforme de Santé Numérique 🏆',
+    'proj1.desc':'Une plateforme de santé numérique complète permettant aux patients algériens de prendre des rendez-vous et accéder à leurs dossiers médicaux. Récompensée par un Label officiel pour son impact et sa qualité.',
+    'proj7.name':'MyRein — Application Compagnon pour Patients Dialysés',
+    'proj7.desc':'Une application mobile dédiée aux patients atteints de maladie rénale sous dialyse, leur permettant d\'enregistrer et suivre les informations médicales essentielles — séances de dialyse, médicaments, résultats d\'analyses, régime alimentaire et rappels de rendez-vous.',
+    'proj2.name':'Système de présence — Reconnaissance faciale',
+    'proj2.desc':'Gestion de la présence universitaire par reconnaissance faciale en temps réel.',
+    'proj3.name':'Application de Gestion de Restaurant',
+    'proj3.desc':'Application de bureau complète pour les opérations de restaurant.',
+    'proj4.name':'Application de Chat — Style Messenger',
+    'proj4.desc':'Application de chat multi-utilisateurs en temps réel inspirée de Messenger, avec messagerie privée, salons de groupe et partage de fichiers.',
+    'proj5.name':'Sites E-Commerce','proj5.desc':'Solutions e-commerce personnalisées avec gestion des paiements.',
+    'proj6.name':'Applications Mobiles Personnalisées','proj6.desc':'Applications mobiles multiplateformes Flutter pour iOS et Android.',
+    'btn.details':'Détails','btn.demo':'Démo live','btn.code':'Voir le code',
+    'services.eyebrow':'Ce que j\'offre','services.title':'Mes Services',
+    'services.sub':'Services de développement professionnel adaptés à vos objectifs.',
+    'svc1.name':'Page d\'atterrissage','svc1.desc':'Pages à fort taux de conversion pour capter des prospects.','svc1.price':'À partir de 26 000 DA',
+    'svc2.name':'Site Web Professionnel','svc2.desc':'Sites multi-pages pour entreprises et professionnels.','svc2.price':'À partir de 26 000 DA',
+    'svc3.name':'Site E-Commerce','svc3.desc':'Boutiques en ligne complètes avec paiement intégré.','svc3.price':'À partir de 39 000 DA',
+    'svc4.name':'Application Mobile','svc4.desc':'Apps iOS & Android multiplateformes avec Flutter.','svc4.price':'À partir de 65 000 DA',
+    'svc5.name':'Application Desktop','svc5.desc':'Logiciels de bureau puissants.','svc5.price':'À partir de 39 000 DA',
+    'svc6.name':'Conception de Base de données','svc6.desc':'Architecture de base de données optimisée.','svc6.price':'À partir de 13 000 DA',
+    'svc7.name':'Intégration IA','svc7.desc':'Intégrez des modèles ML, chatbots, vision par ordinateur.','svc7.price':'À partir de 26 000 DA',
+    'svc8.name':'Maintenance & Support','svc8.desc':'Support continu, corrections de bugs et optimisation.','svc8.price':'À partir de 6 500 DA/mois',
+    'quote.eyebrow':'Estimation instantanée','quote.title':'Obtenez un Devis Gratuit',
+    'quote.sub':'Remplissez les détails de votre projet et obtenez une estimation instantanée.',
+    'quote.formtitle':'Détails du Projet','quote.empty':'Remplissez le formulaire et cliquez sur Calculer.',
+    'quote.summary':'Résumé de votre Devis','quote.estimated':'Budget Estimé',
+    'quote.timeline':'Délai de développement','quote.complexity':'Complexité',
+    'form.name':'Nom complet *','form.email':'E-mail *','form.phone':'Téléphone','form.company':'Nom de l\'entreprise',
+    'form.service':'Type de service *','form.select':'-- Sélectionnez un service --',
+    'opt.landing':'Page d\'atterrissage','opt.business':'Site Web Professionnel','opt.ecommerce':'Site E-Commerce',
+    'opt.mobile':'Application Mobile','opt.desktop':'Application Desktop','opt.ai':'Intégration IA',
+    'form.desc':'Description du projet *','form.pages':'Nombre de pages / écrans','form.features':'Fonctionnalités requises',
+    'feat.mobile':'📱 Version Mobile','feat.db':'🗄️ Base de données','feat.auth':'🔐 Authentification',
+    'feat.payment':'💳 Paiement','feat.ai':'🤖 Fonctionnalités IA','feat.admin':'⚙️ Tableau de bord Admin',
+    'form.deadline':'Date limite','btn.calculate':'Calculer mon devis','btn.send':'Envoyer la demande','btn.pdf':'Exporter PDF',
+    'test.eyebrow':'Avis clients','test.title':'Ce que disent les clients',
+    'rev1.text':'"Hanaa a livré notre plateforme de santé au-delà des attentes. Professionnelle et techniquement excellente."',
+    'rev1.role':'Directeur médical, Sihaty DZ',
+    'rev2.text':'"Le système de présence par reconnaissance faciale a transformé notre université. Précis et intuitif."',
+    'rev2.role':'Chef de département universitaire',
+    'rev3.text':'"Notre application restaurant est révolutionnaire. L\'efficacité a augmenté de 40%. Hautement recommandée !"',
+    'rev3.role':'Propriétaire de restaurant, Ain Temouchent',
+    'rev4.text':'"Application mobile fantastique ! Elle a compris notre vision et livré dans les délais et le budget."',
+    'rev4.role':'Fondatrice de startup, Alger',
+    'contact.eyebrow':'Entrez en contact','contact.title':'Travaillons Ensemble',
+    'contact.sub':'Vous avez un projet ? Discutons de comment je peux vous aider.',
+    'contact.h3':'Connectez-vous avec moi','contact.p':"Je suis toujours ouverte à de nouvelles opportunités. Ma boîte mail est toujours ouverte !",
+    'contact.location':'📍 Localisation','contact.avail':'⏱ Disponibilité',
+    'contact.availval':'Disponible pour projets à distance et locaux',
+    'contact.formtitle':'Envoyer un message',
+    'form.subject':'Sujet *','form.message':'Message *','btn.sendmsg':'Envoyer',
+    'footer.tagline':'Création de solutions numériques élégantes pour des résultats concrets.',
+    'footer.nav':'Navigation','footer.services':'Services','footer.contact':'Contact',
+    'footer.rights':'Tous droits réservés.','footer.admin':'Panneau Admin',
+    'admin.title':'Tableau de bord Admin','admin.close':'Fermer',
+    'admin.total':'Total demandes','admin.avg':'Devis moyen','admin.high':'Haute complexité','admin.top':'Service principal',
+    'admin.requests':'Demandes de service','admin.empty':'Aucune demande pour l\'instant.',
+    'th.name':'Nom','th.email':'E-mail','th.service':'Service','th.quote':'Devis',
+    'th.complexity':'Complexité','th.date':'Date','th.actions':'Actions',
+  },
+  ar: {
+    'nav.home':'الرئيسية','nav.about':'عني','nav.portfolio':'أعمالي',
+    'nav.services':'الخدمات','nav.quote':'طلب عرض','nav.testimonials':'التقييمات','nav.contact':'تواصل',
+    'hero.badge':'متاحة للمشاريع','hero.title':'مطورة برمجيات ومهندسة أنظمة معلومات',
+    'hero.desc':'بناء حلول رقمية أنيقة — من منصات الويب الذكية إلى تطبيقات الهاتف وأنظمة الذكاء الاصطناعي.',
+    'hero.btn1':'عرض المشاريع','hero.btn2':'طلب خدمة',
+    'stat.projects':'مشاريع','stat.years':'سنوات خبرة','stat.skills':'تقنيات',
+    'about.eyebrow':'من أنا','about.title':'عنّي',
+    'about.role':'مطورة برمجيات ومهندسة تقنية معلومات',
+    'about.bio':'مرحباً! أنا زيغ هناء، مطورة برمجيات شغوفة ومهندسة أنظمة معلومات من الجزائر. حاصلة على ماستر 2 في CYSIA (2026) وأتممت تكوينات في التفكير التصميمي (Design Thinking) ونموذج الأعمال (Business Model). أتخصص في بناء حلول رقمية متكاملة. تابعوني على إنستغرام: @inova_dart.',
+    'about.skills':'المهارات التقنية',
+    'portfolio.eyebrow':'أعمالي','portfolio.title':'المشاريع المميزة',
+    'portfolio.sub':'مجموعة مختارة من مشاريعي.',
+    'proj1.name':'صحتي DZ — منصة الصحة الرقمية 🏆','proj1.desc':'منصة صحة رقمية شاملة تتيح للمرضى الجزائريين حجز المواعيد والوصول إلى السجلات الطبية. حازت على Label رسمي لجودتها وتأثيرها.',
+    'proj7.name':'MyRein — تطبيق مرافق لمرضى الغسيل الكلوي',
+    'proj7.desc':'تطبيق موبايل مخصص لمرضى الفشل الكلوي الخاضعين للغسيل الكلوي، يتيح لهم تسجيل ومتابعة المعلومات الطبية الضرورية — جلسات الغسيل، الأدوية، نتائج التحاليل، النظام الغذائي وتذكير المواعيد.',
+    'proj2.name':'نظام الحضور — التعرف على الوجه','proj2.desc':'إدارة حضور الجامعة باستخدام تقنية التعرف على الوجه في الوقت الفعلي.',
+    'proj3.name':'تطبيق إدارة المطعم','proj3.desc':'تطبيق سطح مكتب متكامل لعمليات المطعم.',
+    'proj4.name':'تطبيق دردشة — على غرار Messenger','proj4.desc':'تطبيق دردشة متعدد المستخدمين في الوقت الفعلي مستوحى من Messenger، يدعم المراسلة الخاصة وغرف المجموعات ومشاركة الملفات.',
+    'proj5.name':'مواقع التجارة الإلكترونية','proj5.desc':'حلول تجارة إلكترونية مخصصة مع بوابات دفع.',
+    'proj6.name':'تطبيقات الهاتف المخصصة','proj6.desc':'تطبيقات متعددة المنصات مبنية بـ Flutter.',
+    'btn.details':'التفاصيل','btn.demo':'عرض حي','btn.code':'الكود',
+    'services.eyebrow':'ما أقدمه','services.title':'خدماتي',
+    'services.sub':'خدمات تطوير احترافية مصممة لأهدافك.',
+    'svc1.name':'صفحة هبوط','svc1.desc':'صفحات هبوط عالية التحويل لعرض علامتك التجارية.','svc1.price':'من 26,000 دج',
+    'svc2.name':'موقع أعمال','svc2.desc':'مواقع متعددة الصفحات للشركات والمهنيين.','svc2.price':'من 26,000 دج',
+    'svc3.name':'موقع تجارة إلكترونية','svc3.desc':'متاجر إلكترونية كاملة مع بوابة دفع.','svc3.price':'من 39,000 دج',
+    'svc4.name':'تطبيق موبايل','svc4.desc':'تطبيقات iOS وAndroid بـ Flutter.','svc4.price':'من 65,000 دج',
+    'svc5.name':'تطبيق سطح مكتب','svc5.desc':'برامج قوية لـ Windows/Linux.','svc5.price':'من 39,000 دج',
+    'svc6.name':'تصميم قواعد البيانات','svc6.desc':'بنية قواعد بيانات محسّنة.','svc6.price':'من 13,000 دج',
+    'svc7.name':'تكامل الذكاء الاصطناعي','svc7.desc':'دمج نماذج الذكاء الاصطناعي في أنظمتك.','svc7.price':'من 26,000 دج',
+    'svc8.name':'صيانة ودعم','svc8.desc':'دعم مستمر وإصلاح الأخطاء.','svc8.price':'من 6,500 دج/شهر',
+    'quote.eyebrow':'تقدير فوري','quote.title':'احصل على عرض مجاني',
+    'quote.sub':'أدخل تفاصيل مشروعك واحصل على تقدير فوري.',
+    'quote.formtitle':'تفاصيل المشروع','quote.empty':'أكمل النموذج واضغط احسب للحصول على عرض أسعار.',
+    'quote.summary':'ملخص عرض الأسعار','quote.estimated':'الميزانية التقديرية',
+    'quote.timeline':'مدة التطوير','quote.complexity':'التعقيد',
+    'form.name':'الاسم الكامل *','form.email':'البريد الإلكتروني *','form.phone':'الهاتف','form.company':'اسم الشركة',
+    'form.service':'نوع الخدمة *','form.select':'-- اختر خدمة --',
+    'opt.landing':'صفحة هبوط','opt.business':'موقع أعمال','opt.ecommerce':'موقع تجارة إلكترونية',
+    'opt.mobile':'تطبيق موبايل','opt.desktop':'تطبيق سطح مكتب','opt.ai':'تكامل AI',
+    'form.desc':'وصف المشروع *','form.pages':'عدد الصفحات / الشاشات','form.features':'الميزات المطلوبة',
+    'feat.mobile':'📱 نسخة موبايل','feat.db':'🗄️ قاعدة بيانات','feat.auth':'🔐 تسجيل دخول',
+    'feat.payment':'💳 نظام دفع','feat.ai':'🤖 ميزات AI','feat.admin':'⚙️ لوحة تحكم',
+    'form.deadline':'الموعد النهائي','btn.calculate':'احسب عرض الأسعار','btn.send':'أرسل الطلب','btn.pdf':'تصدير PDF',
+    'test.eyebrow':'تقييمات العملاء','test.title':'ماذا يقول العملاء',
+    'rev1.text':'"هناء سلّمت منصة الصحة فوق التوقعات. محترفة ومتميزة تقنياً."','rev1.role':'المدير الطبي، صحتي DZ',
+    'rev2.text':'"نظام الحضور بالتعرف على الوجه حوّل طريقة إدارة جامعتنا. دقيق وسهل الاستخدام."','rev2.role':'رئيس قسم جامعي',
+    'rev3.text':'"تطبيق المطعم غيّر طريقة عملنا. تحسّنت الكفاءة بنسبة 40%. أوصي به بشدة!"','rev3.role':'صاحب مطعم، وهران',
+    'rev4.text':'"تطبيق موبايل رائع! فهمت رؤيتنا وسلّمت في الوقت وضمن الميزانية."','rev4.role':'مؤسسة شركة ناشئة، الجزائر',
+    'contact.eyebrow':'تواصل معي','contact.title':'لنعمل معاً',
+    'contact.sub':'لديك مشروع؟ دعنا نتحدث عن كيف يمكنني المساعدة.',
+    'contact.h3':'تواصل معي','contact.p':'أنا دائماً منفتحة على فرص جديدة. بريدي الإلكتروني مفتوح دائماً!',
+    'contact.location':'📍 الموقع','contact.avail':'⏱ التوافر',
+    'contact.availval':'متاحة للمشاريع عن بُعد والمحلية',
+    'contact.formtitle':'أرسل رسالة',
+    'form.subject':'الموضوع *','form.message':'الرسالة *','btn.sendmsg':'إرسال',
+    'footer.tagline':'بناء حلول رقمية أنيقة تحقق نتائج أعمال حقيقية.',
+    'footer.nav':'التنقل','footer.services':'الخدمات','footer.contact':'تواصل',
+    'footer.rights':'جميع الحقوق محفوظة.','footer.admin':'لوحة الإدارة',
+    'admin.title':'لوحة الإدارة','admin.close':'إغلاق',
+    'admin.total':'إجمالي الطلبات','admin.avg':'متوسط العروض','admin.high':'تعقيد عالٍ','admin.top':'الخدمة الأكثر طلباً',
+    'admin.requests':'طلبات الخدمة','admin.empty':'لا توجد طلبات بعد.',
+    'th.name':'الاسم','th.email':'البريد','th.service':'الخدمة','th.quote':'العرض',
+    'th.complexity':'التعقيد','th.date':'التاريخ','th.actions':'إجراءات',
+  }
+};
+
+let currentLang = 'en';
+const langCycle = ['en', 'fr', 'ar'];
+const langLabels = {en:'EN', fr:'FR', ar:'AR'};
+
+function applyLang(lang) {
+  currentLang = lang;
+  document.documentElement.setAttribute('data-lang', lang);
+  document.getElementById('langBtn').textContent = langLabels[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (i18n[lang][key]) el.textContent = i18n[lang][key];
+  });
+}
+
+document.getElementById('langBtn').addEventListener('click', () => {
+  const idx = langCycle.indexOf(currentLang);
+  applyLang(langCycle[(idx+1) % langCycle.length]);
+});
+
+// ============================
+// THEME
+// ============================
+let isDark = true;
+const themeBtn = document.getElementById('themeBtn');
+themeBtn.addEventListener('click', () => {
+  isDark = !isDark;
+  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+  themeBtn.innerHTML = isDark ? '<i class="fa fa-sun"></i>' : '<i class="fa fa-moon"></i>';
+});
+
+// ============================
+// HAMBURGER
+// ============================
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+
+// ============================
+// SCROLL BEHAVIORS
+// ============================
+window.addEventListener('scroll', () => {
+  const sp = document.getElementById('scrollProgress');
+  const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+  sp.style.width = pct + '%';
+  const bt = document.getElementById('backTop');
+  if (window.scrollY > 400) bt.classList.add('show'); else bt.classList.remove('show');
+  // Nav highlight
+  const sections = ['home','about','portfolio','services','quote','testimonials','contact'];
+  let current = '';
+  sections.forEach(id => {
+    const sec = document.getElementById(id);
+    if (sec && window.scrollY >= sec.offsetTop - 120) current = id;
+  });
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#'+current);
+  });
+});
+
+// ============================
+// FADE UP OBSERVER
+// ============================
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// ============================
+// PRELOADER
+// ============================
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('preloader').classList.add('fade');
+    setTimeout(() => document.getElementById('preloader').style.display='none', 600);
+  }, 800);
+});
+
+// ============================
+// QUOTATION CALCULATOR (prices in DA - Algerian Dinar)
+// ============================
+const PRICING = {
+  base: { landing:26000, business:26000, ecommerce:39000, mobile:65000, desktop:39000, ai:26000 },
+  pageRate: 2500,
+  features: { fMobile:65000, fDatabase:13000, fAuth:6500, fPayment:19500, fAI:39000, fAdmin:10500 }
+};
+const TIMELINE = {
+  landing:'1-2 weeks', business:'2-4 weeks', ecommerce:'4-8 weeks',
+  mobile:'6-12 weeks', desktop:'4-8 weeks', ai:'4-10 weeks'
+};
+
+function calculateQuote() {
+  const name = document.getElementById('qName').value.trim();
+  const email = document.getElementById('qEmail').value.trim();
+  const service = document.getElementById('qService').value;
+  const desc = document.getElementById('qDesc').value.trim();
+  if (!name || !email || !service || !desc) {
+    showToast('error', 'Please fill in all required fields.');
+    return;
+  }
+  const pages = parseInt(document.getElementById('qPages').value) || 1;
+  let total = PRICING.base[service] || 26000;
+  const breakdown = [{ label: 'Base price (' + service + ')', price: total }];
+  const extraPages = Math.max(0, pages - 1);
+  if (extraPages > 0) {
+    const pageCost = extraPages * PRICING.pageRate;
+    total += pageCost;
+    breakdown.push({ label: `Additional pages (${extraPages} × ${PRICING.pageRate.toLocaleString()} DA)`, price: pageCost });
+  }
+  const featureLabels = { fMobile:'Mobile App Version', fDatabase:'Database', fAuth:'User Authentication', fPayment:'Payment System', fAI:'AI Features', fAdmin:'Admin Dashboard' };
+  Object.entries(PRICING.features).forEach(([id, cost]) => {
+    if (document.getElementById(id).checked) {
+      total += cost;
+      breakdown.push({ label: featureLabels[id], price: cost });
+    }
+  });
+  const complexity = total < 80000 ? 'Low' : total < 160000 ? 'Medium' : 'High';
+  const timeline = TIMELINE[service] || '4-8 weeks';
+
+  document.getElementById('quotePlaceholder').style.display = 'none';
+  const resultEl = document.getElementById('quoteResult');
+  resultEl.classList.add('show');
+  document.getElementById('qTotal').textContent = total.toLocaleString() + ' DA';
+  document.getElementById('qTotalNote').textContent = 'Excluding taxes. Final price may vary.';
+  document.getElementById('qTimeline').textContent = timeline;
+  const cx = document.getElementById('qComplexity');
+  cx.innerHTML = `<span class="complexity-badge complexity-${complexity.toLowerCase()}">${complexity}</span>`;
+  let bHTML = breakdown.map((b,i) => `<div class="breakdown-item"><span class="breakdown-label">${b.label}</span><span class="breakdown-price">+${b.price.toLocaleString()} DA</span></div>`).join('');
+  bHTML += `<div class="breakdown-item"><span>Total Estimate</span><span>${total.toLocaleString()} DA</span></div>`;
+  document.getElementById('qBreakdown').innerHTML = bHTML;
+  // Store for saving
+  window._lastQuote = { name, email, service, desc, total, complexity, timeline, date: new Date().toLocaleDateString() };
+  showToast('success', 'Quote calculated successfully!');
+}
+
+function saveQuoteRequest() {
+  if (!window._lastQuote) { showToast('error','Please calculate your quote first.'); return; }
+  const requests = JSON.parse(localStorage.getItem('hds_requests')||'[]');
+  requests.unshift({ id: Date.now(), ...window._lastQuote });
+  localStorage.setItem('hds_requests', JSON.stringify(requests));
+  showToast('success','Your request has been submitted! We\'ll be in touch soon.');
+  // Reset form
+  ['qName','qEmail','qPhone','qCompany','qDesc'].forEach(id => document.getElementById(id).value='');
+  document.getElementById('qService').value='';
+  document.getElementById('qPages').value='5';
+  ['fMobile','fDatabase','fAuth','fPayment','fAI','fAdmin'].forEach(id => document.getElementById(id).checked=false);
+  document.getElementById('quoteResult').classList.remove('show');
+  document.getElementById('quotePlaceholder').style.display='flex';
+  window._lastQuote = null;
+}
+
+function exportQuotePDF() {
+  if (!window._lastQuote) { showToast('error','Please calculate a quote first.'); return; }
+  const q = window._lastQuote;
+  const content = `HANAA DEV SOLUTIONS\nQuotation Summary\n${'='.repeat(40)}\n\nClient: ${q.name}\nEmail: ${q.email}\nService: ${q.service}\n\nProject Description:\n${q.desc}\n\n${'='.repeat(40)}\nESTIMATED BUDGET: ${q.total.toLocaleString()} DA\nTIMELINE: ${q.timeline}\nCOMPLEXITY: ${q.complexity}\n${'='.repeat(40)}\n\nDate: ${q.date}\n\nThank you for choosing Hanaa Dev Solutions!\nContact: hanaa@hanaadevsolutions.com`;
+  const blob = new Blob([content], {type:'text/plain'});
+  const a = document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download=`Quote_${q.name.replace(/\s/g,'_')}.txt`; a.click();
+  showToast('success','Quote exported!');
+}
+
+// ============================
+// CONTACT FORM
+// ============================
+function sendContact() {
+  const name = document.getElementById('cName').value.trim();
+  const email = document.getElementById('cEmail').value.trim();
+  const subject = document.getElementById('cSubject').value.trim();
+  const msg = document.getElementById('cMessage').value.trim();
+  if (!name || !email || !subject || !msg) { showToast('error','Please fill in all fields.'); return; }
+  if (!email.includes('@')) { showToast('error','Please enter a valid email.'); return; }
+  showToast('success','Message sent! I\'ll reply within 24 hours.');
+  ['cName','cEmail','cSubject','cMessage'].forEach(id => document.getElementById(id).value='');
+}
+
+// ============================
+// ADMIN PANEL
+// ============================
+function openAdmin() {
+  document.getElementById('admin').classList.add('open');
+  loadAdminData();
+}
+function closeAdmin() {
+  document.getElementById('admin').classList.remove('open');
+}
+
+function loadAdminData() {
+  const requests = JSON.parse(localStorage.getItem('hds_requests')||'[]');
+  document.getElementById('statTotal').textContent = requests.length;
+  if (requests.length > 0) {
+    const avg = Math.round(requests.reduce((s,r)=>s+r.total,0)/requests.length);
+    document.getElementById('statAvg').textContent = avg.toLocaleString()+' DA';
+    const high = requests.filter(r=>r.complexity==='High').length;
+    document.getElementById('statHigh').textContent = high;
+    const svcCount = {};
+    requests.forEach(r => svcCount[r.service] = (svcCount[r.service]||0)+1);
+    const top = Object.entries(svcCount).sort((a,b)=>b[1]-a[1])[0];
+    document.getElementById('statServices').textContent = top ? top[0] : '—';
+  }
+  const tbody = document.getElementById('requestsTableBody');
+  const noReq = document.getElementById('noRequests');
+  if (requests.length === 0) {
+    tbody.innerHTML=''; noReq.style.display='block'; return;
+  }
+  noReq.style.display='none';
+  tbody.innerHTML = requests.map((r,i) => `
+    <tr>
+      <td>${i+1}</td>
+      <td><strong>${r.name}</strong></td>
+      <td>${r.email}</td>
+      <td>${r.service}</td>
+      <td style="color:var(--blue-light);font-weight:700">${r.total.toLocaleString()} DA</td>
+      <td><span class="complexity-badge complexity-${(r.complexity||'').toLowerCase()}">${r.complexity}</span></td>
+      <td>${r.date}</td>
+      <td>
+        <button class="tbl-btn" onclick="viewRequest(${r.id})"><i class="fa fa-eye"></i></button>
+        <button class="tbl-btn danger" onclick="deleteRequest(${r.id})"><i class="fa fa-trash"></i></button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function viewRequest(id) {
+  const requests = JSON.parse(localStorage.getItem('hds_requests')||'[]');
+  const r = requests.find(x=>x.id===id);
+  if (!r) return;
+  document.getElementById('modalTitle').textContent = `Request from ${r.name}`;
+  document.getElementById('modalBody').innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
+      <div><strong>Email:</strong><br>${r.email}</div>
+      <div><strong>Service:</strong><br>${r.service}</div>
+      <div><strong>Quote:</strong><br><span style="color:var(--blue-light);font-weight:700;font-size:1.2rem">${r.total.toLocaleString()} DA</span></div>
+      <div><strong>Complexity:</strong><br><span class="complexity-badge complexity-${(r.complexity||'').toLowerCase()}">${r.complexity}</span></div>
+      <div><strong>Timeline:</strong><br>${r.timeline}</div>
+      <div><strong>Date:</strong><br>${r.date}</div>
+    </div>
+    <div><strong>Description:</strong><br><p style="color:var(--text-secondary);margin-top:0.5rem;line-height:1.6">${r.desc}</p></div>
+  `;
+  document.getElementById('projectModal').classList.add('open');
+}
+
+function deleteRequest(id) {
+  let requests = JSON.parse(localStorage.getItem('hds_requests')||'[]');
+  requests = requests.filter(r=>r.id!==id);
+  localStorage.setItem('hds_requests', JSON.stringify(requests));
+  loadAdminData();
+  showToast('success','Request deleted.');
+}
+
+function clearAllRequests() {
+  if (!confirm('Clear all requests? This cannot be undone.')) return;
+  localStorage.removeItem('hds_requests');
+  loadAdminData();
+  showToast('success','All requests cleared.');
+}
+
+function exportAllPDF() {
+  const requests = JSON.parse(localStorage.getItem('hds_requests')||'[]');
+  if (requests.length===0) { showToast('error','No requests to export.'); return; }
+  let content = 'HANAA DEV SOLUTIONS — ALL REQUESTS\n'+'='.repeat(50)+'\n\n';
+  requests.forEach((r,i) => {
+    content += `[${i+1}] ${r.name} | ${r.email} | ${r.service} | ${r.total.toLocaleString()} DA | ${r.complexity} | ${r.date}\n`;
+  });
+  const blob = new Blob([content],{type:'text/plain'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download='All_Requests.txt'; a.click();
+  showToast('success','Exported!');
+}
+
+// ============================
+// PROJECT MODALS
+// ============================
+const projectDetails = [
+  { title:'Sihaty DZ — Digital Health Platform 🏆', emoji:'🏥', desc:'A comprehensive digital health ecosystem designed for the Algerian healthcare system. Patients can register, search for doctors, book appointments, view medical history, and receive prescription reminders. Healthcare providers get a full dashboard for patient management. This project received an official Label recognizing its quality and impact.', tech:['PHP','MySQL','JavaScript','Bootstrap','REST API'], features:['Online appointment booking','Patient medical records','Doctor search & profiles','SMS reminders','Admin dashboard','🏆 Official Label awarded'] },
+  { title:'Attendance System — Facial Recognition', emoji:'👁️', desc:'An AI-powered university attendance system using real-time facial recognition. The system automatically detects and logs student attendance, generates reports for professors, and sends notifications to absent students.', tech:['Python','OpenCV','TensorFlow','SQLite','Tkinter'], features:['Real-time face detection','Auto attendance logging','Professor report dashboard','Student notification system','Export to Excel'] },
+  { title:'Restaurant Management Application', emoji:'🍽️', desc:'A complete restaurant management desktop application covering the entire operation — from table management and order taking to kitchen display, inventory control, billing, and detailed analytics.', tech:['Java','JavaFX','MySQL','JasperReports'], features:['Order & table management','Kitchen display system','Inventory tracking','Staff scheduling','Financial reports'] },
+  { title:'Chat App — Messenger-Style Messaging', emoji:'💬', desc:'A networked real-time chat application inspired by Messenger, supporting multiple concurrent users through multithreading. Includes private messaging, group chat rooms, and file sharing capabilities.', tech:['Java','Sockets','Multithreading','Swing GUI'], features:['Real-time messaging','Multiple chat rooms','Private messaging','File transfer','User authentication'] },
+  { title:'E-Commerce Websites', emoji:'🛒', desc:'Multiple custom e-commerce solutions built for various clients. Each store features a product catalog, shopping cart, secure checkout with payment gateway integration, order tracking, and a full admin panel.', tech:['PHP','Laravel','Vue.js','MySQL','Stripe'], features:['Product catalog','Shopping cart','Payment integration','Order tracking','Admin panel'] },
+  { title:'Custom Mobile Applications', emoji:'📱', desc:'Cross-platform mobile applications developed with Flutter for both iOS and Android. These include apps for retail, services, and productivity, all featuring clean UI, offline support, and backend integration.', tech:['Flutter','Dart','Firebase','REST API'], features:['Cross-platform (iOS & Android)','Push notifications','Offline mode','Firebase integration','Clean Material UI'] },
+  { title:'MyRein — Dialysis Patient Companion App', emoji:'🩺', desc:'A dedicated mobile companion for patients with kidney disease undergoing dialysis. The app centralizes every piece of information patients need to manage their condition day to day — dialysis session tracking, medication schedules, lab results history, dietary guidance, and appointment reminders — so patients and their care teams stay on the same page.', tech:['Flutter','Dart','Firebase','REST API'], features:['Dialysis session tracking','Medication reminders','Lab results history','Diet & fluid intake tracking','Appointment reminders','Secure patient data storage'] }
+];
+
+function openProjectModal(idx) {
+  const p = projectDetails[idx];
+  document.getElementById('modalTitle').textContent = p.emoji + ' ' + p.title;
+  document.getElementById('modalBody').innerHTML = `
+    <p style="color:var(--text-secondary);line-height:1.7;margin-bottom:1.5rem">${p.desc}</p>
+    <div style="margin-bottom:1.2rem">
+      <strong style="font-size:0.85rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.05em">Technologies</strong>
+      <div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.5rem">
+        ${p.tech.map(t=>`<span class="tech-tag" style="font-size:0.8rem;padding:0.25rem 0.7rem">${t}</span>`).join('')}
+      </div>
+    </div>
+    <div>
+      <strong style="font-size:0.85rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.05em">Key Features</strong>
+      <ul style="margin-top:0.5rem;list-style:none">
+        ${p.features.map(f=>`<li style="padding:0.3rem 0;color:var(--text-secondary);font-size:0.9rem">✅ ${f}</li>`).join('')}
+      </ul>
+    </div>
+  `;
+  document.getElementById('projectModal').classList.add('open');
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+}
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', e => { if(e.target===overlay) overlay.classList.remove('open'); });
+});
+
+// ============================
+// TOAST
+// ============================
+let toastTimer;
+function showToast(type, msg) {
+  const t = document.getElementById('toast');
+  t.className = 'toast ' + type;
+  t.querySelector('i').className = type==='success' ? 'fa fa-check-circle' : 'fa fa-exclamation-circle';
+  document.getElementById('toastMsg').textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+// Set min date for deadline
+document.getElementById('qDeadline').min = new Date().toISOString().split('T')[0];
+
+// Initial lang
+applyLang('en');
+</script>
+</body>
+</html>
