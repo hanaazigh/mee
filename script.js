@@ -1,7 +1,4 @@
 
-// ============================
-// TRANSLATIONS
-// ============================
 const i18n = {
   en: {
     'nav.home':'Home','nav.about':'About','nav.portfolio':'Portfolio',
