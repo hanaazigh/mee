@@ -12,34 +12,33 @@ const i18n = {
     'stat.projects':'Projects','stat.years':'Years Exp.','stat.skills':'Technologies',
     'about.eyebrow':'Who I Am','about.title':'About Me',
     'about.role':'Software Developer & IT Engineer',
-    'about.bio':"Hi! I'm Zigh Hanaa, a passionate Software Developer and Information Systems Engineer based in Algeria. I hold a Master 2 in CYSIA (2026) and completed training in Design Thinking and Business Model design. I specialize in crafting full-stack digital solutions — from dynamic web platforms and responsive mobile applications to sophisticated AI integrations and database architectures. Find me on Instagram: @inova_dart.",
+    'about.bio':"Hi! I'm Hanaa Zigh, a passionate Software Developer and Information Systems Engineer based in Algeria. I specialize in crafting full-stack digital solutions — from dynamic web platforms and responsive mobile applications to sophisticated AI integrations and database architectures.",
     'about.skills':'Technical Skills',
     'portfolio.eyebrow':'My Work','portfolio.title':'Featured Projects',
     'portfolio.sub':'A selection of projects I\'ve built — from health platforms to AI-powered systems.',
-    'proj1.name':'Sihaty DZ — Digital Health Platform 🏆',
-    'proj1.desc':'A comprehensive digital health platform enabling Algerian patients to book appointments, access medical records, and connect with healthcare professionals online. Awarded an official Label for its impact and quality.',
-    'proj7.name':'MyRein — Dialysis Patient Companion App',
-    'proj7.desc':'A mobile application dedicated to patients with kidney disease undergoing dialysis, allowing them to record and track essential medical information — dialysis sessions, medications, lab results, diet and appointment reminders.',
+    'proj1.name':'Sihaty DZ — Digital Health Platform',
+    'proj1.desc':'A comprehensive digital health platform enabling Algerian patients to book appointments, access medical records, and connect with healthcare professionals online.',
     'proj2.name':'Attendance System — Facial Recognition',
     'proj2.desc':'University attendance management using real-time facial recognition technology, reducing manual work and increasing accuracy.',
     'proj3.name':'Restaurant Management Application',
     'proj3.desc':'Full-featured desktop application for restaurant operations — orders, inventory, billing, staff and analytics.',
-    'proj4.name':'Chat App — Messenger-Style Messaging',
-    'proj4.desc':'Real-time multi-user chat application inspired by Messenger, supporting private conversations, group rooms, and file sharing.',
+    'proj4.name':'Java Client-Server Chat Application',
+    'proj4.desc':'Real-time multi-user chat system built with Java sockets, supporting private messaging, group rooms, and file transfer.',
     'proj5.name':'E-Commerce Websites',
     'proj5.desc':'Custom e-commerce solutions with product management, shopping cart, payment gateways, and admin dashboards.',
-    'proj6.name':'Custom Mobile Applications','proj6.desc':'Cross-platform mobile apps built with Flutter, delivering smooth native-like experiences for iOS and Android.',
+    'proj6.name':'Custom Mobile Applications',
+    'proj6.desc':'Cross-platform mobile apps built with Flutter, delivering smooth native-like experiences for iOS and Android.',
     'btn.details':'Details','btn.demo':'Live Demo','btn.code':'View Code',
     'services.eyebrow':'What I Offer','services.title':'My Services',
     'services.sub':'Professional development services tailored to your business goals and budget.',
-    'svc1.name':'Landing Page','svc1.desc':'High-converting landing pages designed to capture leads and showcase your brand.','svc1.price':'From 26,000 DA',
-    'svc2.name':'Business Website','svc2.desc':'Multi-page professional websites for companies and service-based businesses.','svc2.price':'From 26,000 DA',
-    'svc3.name':'E-Commerce Website','svc3.desc':'Full-featured online stores with payment integration and admin panel.','svc3.price':'From 39,000 DA',
-    'svc4.name':'Mobile Application','svc4.desc':'Cross-platform iOS & Android apps built with Flutter.','svc4.price':'From 65,000 DA',
-    'svc5.name':'Desktop Application','svc5.desc':'Powerful desktop software for Windows/Linux.','svc5.price':'From 39,000 DA',
-    'svc6.name':'Database Design','svc6.desc':'Optimized relational and NoSQL database architecture.','svc6.price':'From 13,000 DA',
-    'svc7.name':'AI Integration','svc7.desc':'Integrate ML models, chatbots, computer vision into your systems.','svc7.price':'From 26,000 DA',
-    'svc8.name':'Maintenance & Support','svc8.desc':'Ongoing support, bug fixes, and performance optimization.','svc8.price':'From 6,500 DA/mo',
+    'svc1.name':'Landing Page','svc1.desc':'High-converting landing pages designed to capture leads and showcase your brand.','svc1.price':'From $200',
+    'svc2.name':'Business Website','svc2.desc':'Multi-page professional websites for companies and service-based businesses.','svc2.price':'From $400',
+    'svc3.name':'E-Commerce Website','svc3.desc':'Full-featured online stores with payment integration and admin panel.','svc3.price':'From $800',
+    'svc4.name':'Mobile Application','svc4.desc':'Cross-platform iOS & Android apps built with Flutter.','svc4.price':'From $500',
+    'svc5.name':'Desktop Application','svc5.desc':'Powerful desktop software for Windows/Linux.','svc5.price':'From $600',
+    'svc6.name':'Database Design','svc6.desc':'Optimized relational and NoSQL database architecture.','svc6.price':'From $100',
+    'svc7.name':'AI Integration','svc7.desc':'Integrate ML models, chatbots, computer vision into your systems.','svc7.price':'From $300',
+    'svc8.name':'Maintenance & Support','svc8.desc':'Ongoing support, bug fixes, and performance optimization.','svc8.price':'From $50/mo',
     'quote.eyebrow':'Instant Estimate','quote.title':'Get a Free Quote',
     'quote.sub':'Fill in your project details and get an instant price estimate with timeline.',
     'quote.formtitle':'Project Details','quote.empty':'Fill in the form and click Calculate to see your instant quote.',
@@ -60,7 +59,7 @@ const i18n = {
     'rev2.text':'"The facial recognition attendance system transformed how we manage our university. Incredibly accurate and intuitive."',
     'rev2.role':'University Department Head',
     'rev3.text':'"Our restaurant app is a game changer. Efficiency improved by 40%. Highly recommend Hanaa!"',
-    'rev3.role':'Restaurant Owner, Ain Temouchent',
+    'rev3.role':'Restaurant Owner, Oran',
     'rev4.text':'"Fantastic mobile app! She understood our vision and delivered on time and within budget."',
     'rev4.role':'Startup Founder, Algiers',
     'contact.eyebrow':'Get In Touch','contact.title':'Let\'s Work Together',
@@ -89,33 +88,31 @@ const i18n = {
     'stat.projects':'Projets','stat.years':'Ans d\'exp.','stat.skills':'Technologies',
     'about.eyebrow':'Qui suis-je','about.title':'À propos de Moi',
     'about.role':'Développeuse Logiciel & Ingénieure IT',
-    'about.bio':"Bonjour ! Je suis Zigh Hanaa, développeuse logiciel passionnée et ingénieure en systèmes d'information basée en Algérie. Je suis titulaire d'un Master 2 en CYSIA (2026) et j'ai suivi des formations en Design Thinking et en Business Model. Je me spécialise dans la création de solutions numériques complètes. Retrouvez-moi sur Instagram : @inova_dart.",
+    'about.bio':"Bonjour ! Je suis Hanaa Zigh, développeuse logiciel passionnée et ingénieure en systèmes d'information basée en Algérie. Je me spécialise dans la création de solutions numériques complètes.",
     'about.skills':'Compétences Techniques',
     'portfolio.eyebrow':'Mon Travail','portfolio.title':'Projets en vedette',
     'portfolio.sub':'Une sélection de projets que j\'ai réalisés.',
-    'proj1.name':'Sihaty DZ — Plateforme de Santé Numérique 🏆',
-    'proj1.desc':'Une plateforme de santé numérique complète permettant aux patients algériens de prendre des rendez-vous et accéder à leurs dossiers médicaux. Récompensée par un Label officiel pour son impact et sa qualité.',
-    'proj7.name':'MyRein — Application Compagnon pour Patients Dialysés',
-    'proj7.desc':'Une application mobile dédiée aux patients atteints de maladie rénale sous dialyse, leur permettant d\'enregistrer et suivre les informations médicales essentielles — séances de dialyse, médicaments, résultats d\'analyses, régime alimentaire et rappels de rendez-vous.',
+    'proj1.name':'Sihaty DZ — Plateforme de Santé Numérique',
+    'proj1.desc':'Une plateforme de santé numérique complète permettant aux patients algériens de prendre des rendez-vous et accéder à leurs dossiers médicaux.',
     'proj2.name':'Système de présence — Reconnaissance faciale',
     'proj2.desc':'Gestion de la présence universitaire par reconnaissance faciale en temps réel.',
     'proj3.name':'Application de Gestion de Restaurant',
     'proj3.desc':'Application de bureau complète pour les opérations de restaurant.',
-    'proj4.name':'Application de Chat — Style Messenger',
-    'proj4.desc':'Application de chat multi-utilisateurs en temps réel inspirée de Messenger, avec messagerie privée, salons de groupe et partage de fichiers.',
+    'proj4.name':'Application de Chat Client-Serveur Java',
+    'proj4.desc':'Système de chat multi-utilisateurs en temps réel avec Java sockets.',
     'proj5.name':'Sites E-Commerce','proj5.desc':'Solutions e-commerce personnalisées avec gestion des paiements.',
     'proj6.name':'Applications Mobiles Personnalisées','proj6.desc':'Applications mobiles multiplateformes Flutter pour iOS et Android.',
     'btn.details':'Détails','btn.demo':'Démo live','btn.code':'Voir le code',
     'services.eyebrow':'Ce que j\'offre','services.title':'Mes Services',
     'services.sub':'Services de développement professionnel adaptés à vos objectifs.',
-    'svc1.name':'Page d\'atterrissage','svc1.desc':'Pages à fort taux de conversion pour capter des prospects.','svc1.price':'À partir de 26 000 DA',
-    'svc2.name':'Site Web Professionnel','svc2.desc':'Sites multi-pages pour entreprises et professionnels.','svc2.price':'À partir de 26 000 DA',
-    'svc3.name':'Site E-Commerce','svc3.desc':'Boutiques en ligne complètes avec paiement intégré.','svc3.price':'À partir de 39 000 DA',
-    'svc4.name':'Application Mobile','svc4.desc':'Apps iOS & Android multiplateformes avec Flutter.','svc4.price':'À partir de 65 000 DA',
-    'svc5.name':'Application Desktop','svc5.desc':'Logiciels de bureau puissants.','svc5.price':'À partir de 39 000 DA',
-    'svc6.name':'Conception de Base de données','svc6.desc':'Architecture de base de données optimisée.','svc6.price':'À partir de 13 000 DA',
-    'svc7.name':'Intégration IA','svc7.desc':'Intégrez des modèles ML, chatbots, vision par ordinateur.','svc7.price':'À partir de 26 000 DA',
-    'svc8.name':'Maintenance & Support','svc8.desc':'Support continu, corrections de bugs et optimisation.','svc8.price':'À partir de 6 500 DA/mois',
+    'svc1.name':'Page d\'atterrissage','svc1.desc':'Pages à fort taux de conversion pour capter des prospects.','svc1.price':'À partir de 200$',
+    'svc2.name':'Site Web Professionnel','svc2.desc':'Sites multi-pages pour entreprises et professionnels.','svc2.price':'À partir de 400$',
+    'svc3.name':'Site E-Commerce','svc3.desc':'Boutiques en ligne complètes avec paiement intégré.','svc3.price':'À partir de 800$',
+    'svc4.name':'Application Mobile','svc4.desc':'Apps iOS & Android multiplateformes avec Flutter.','svc4.price':'À partir de 500$',
+    'svc5.name':'Application Desktop','svc5.desc':'Logiciels de bureau puissants.','svc5.price':'À partir de 600$',
+    'svc6.name':'Conception de Base de données','svc6.desc':'Architecture de base de données optimisée.','svc6.price':'À partir de 100$',
+    'svc7.name':'Intégration IA','svc7.desc':'Intégrez des modèles ML, chatbots, vision par ordinateur.','svc7.price':'À partir de 300$',
+    'svc8.name':'Maintenance & Support','svc8.desc':'Support continu, corrections de bugs et optimisation.','svc8.price':'À partir de 50$/mois',
     'quote.eyebrow':'Estimation instantanée','quote.title':'Obtenez un Devis Gratuit',
     'quote.sub':'Remplissez les détails de votre projet et obtenez une estimation instantanée.',
     'quote.formtitle':'Détails du Projet','quote.empty':'Remplissez le formulaire et cliquez sur Calculer.',
@@ -135,7 +132,7 @@ const i18n = {
     'rev2.text':'"Le système de présence par reconnaissance faciale a transformé notre université. Précis et intuitif."',
     'rev2.role':'Chef de département universitaire',
     'rev3.text':'"Notre application restaurant est révolutionnaire. L\'efficacité a augmenté de 40%. Hautement recommandée !"',
-    'rev3.role':'Propriétaire de restaurant, Ain Temouchent',
+    'rev3.role':'Propriétaire de restaurant, Oran',
     'rev4.text':'"Application mobile fantastique ! Elle a compris notre vision et livré dans les délais et le budget."',
     'rev4.role':'Fondatrice de startup, Alger',
     'contact.eyebrow':'Entrez en contact','contact.title':'Travaillons Ensemble',
@@ -163,29 +160,27 @@ const i18n = {
     'stat.projects':'مشاريع','stat.years':'سنوات خبرة','stat.skills':'تقنيات',
     'about.eyebrow':'من أنا','about.title':'عنّي',
     'about.role':'مطورة برمجيات ومهندسة تقنية معلومات',
-    'about.bio':'مرحباً! أنا زيغ هناء، مطورة برمجيات شغوفة ومهندسة أنظمة معلومات من الجزائر. حاصلة على ماستر 2 في CYSIA (2026) وأتممت تكوينات في التفكير التصميمي (Design Thinking) ونموذج الأعمال (Business Model). أتخصص في بناء حلول رقمية متكاملة. تابعوني على إنستغرام: @inova_dart.',
+    'about.bio':'مرحباً! أنا هناء زيغ، مطورة برمجيات شغوفة ومهندسة أنظمة معلومات من الجزائر. أتخصص في بناء حلول رقمية متكاملة.',
     'about.skills':'المهارات التقنية',
     'portfolio.eyebrow':'أعمالي','portfolio.title':'المشاريع المميزة',
     'portfolio.sub':'مجموعة مختارة من مشاريعي.',
-    'proj1.name':'صحتي DZ — منصة الصحة الرقمية 🏆','proj1.desc':'منصة صحة رقمية شاملة تتيح للمرضى الجزائريين حجز المواعيد والوصول إلى السجلات الطبية. حازت على Label رسمي لجودتها وتأثيرها.',
-    'proj7.name':'MyRein — تطبيق مرافق لمرضى الغسيل الكلوي',
-    'proj7.desc':'تطبيق موبايل مخصص لمرضى الفشل الكلوي الخاضعين للغسيل الكلوي، يتيح لهم تسجيل ومتابعة المعلومات الطبية الضرورية — جلسات الغسيل، الأدوية، نتائج التحاليل، النظام الغذائي وتذكير المواعيد.',
+    'proj1.name':'صحتي DZ — منصة الصحة الرقمية','proj1.desc':'منصة صحة رقمية شاملة تتيح للمرضى الجزائريين حجز المواعيد والوصول إلى السجلات الطبية.',
     'proj2.name':'نظام الحضور — التعرف على الوجه','proj2.desc':'إدارة حضور الجامعة باستخدام تقنية التعرف على الوجه في الوقت الفعلي.',
     'proj3.name':'تطبيق إدارة المطعم','proj3.desc':'تطبيق سطح مكتب متكامل لعمليات المطعم.',
-    'proj4.name':'تطبيق دردشة — على غرار Messenger','proj4.desc':'تطبيق دردشة متعدد المستخدمين في الوقت الفعلي مستوحى من Messenger، يدعم المراسلة الخاصة وغرف المجموعات ومشاركة الملفات.',
+    'proj4.name':'تطبيق دردشة Java خادم-عميل','proj4.desc':'نظام دردشة متعدد المستخدمين في الوقت الفعلي.',
     'proj5.name':'مواقع التجارة الإلكترونية','proj5.desc':'حلول تجارة إلكترونية مخصصة مع بوابات دفع.',
     'proj6.name':'تطبيقات الهاتف المخصصة','proj6.desc':'تطبيقات متعددة المنصات مبنية بـ Flutter.',
     'btn.details':'التفاصيل','btn.demo':'عرض حي','btn.code':'الكود',
     'services.eyebrow':'ما أقدمه','services.title':'خدماتي',
     'services.sub':'خدمات تطوير احترافية مصممة لأهدافك.',
-    'svc1.name':'صفحة هبوط','svc1.desc':'صفحات هبوط عالية التحويل لعرض علامتك التجارية.','svc1.price':'من 26,000 دج',
-    'svc2.name':'موقع أعمال','svc2.desc':'مواقع متعددة الصفحات للشركات والمهنيين.','svc2.price':'من 26,000 دج',
-    'svc3.name':'موقع تجارة إلكترونية','svc3.desc':'متاجر إلكترونية كاملة مع بوابة دفع.','svc3.price':'من 39,000 دج',
-    'svc4.name':'تطبيق موبايل','svc4.desc':'تطبيقات iOS وAndroid بـ Flutter.','svc4.price':'من 65,000 دج',
-    'svc5.name':'تطبيق سطح مكتب','svc5.desc':'برامج قوية لـ Windows/Linux.','svc5.price':'من 39,000 دج',
-    'svc6.name':'تصميم قواعد البيانات','svc6.desc':'بنية قواعد بيانات محسّنة.','svc6.price':'من 13,000 دج',
-    'svc7.name':'تكامل الذكاء الاصطناعي','svc7.desc':'دمج نماذج الذكاء الاصطناعي في أنظمتك.','svc7.price':'من 26,000 دج',
-    'svc8.name':'صيانة ودعم','svc8.desc':'دعم مستمر وإصلاح الأخطاء.','svc8.price':'من 6,500 دج/شهر',
+    'svc1.name':'صفحة هبوط','svc1.desc':'صفحات هبوط عالية التحويل لعرض علامتك التجارية.','svc1.price':'من 200$',
+    'svc2.name':'موقع أعمال','svc2.desc':'مواقع متعددة الصفحات للشركات والمهنيين.','svc2.price':'من 400$',
+    'svc3.name':'موقع تجارة إلكترونية','svc3.desc':'متاجر إلكترونية كاملة مع بوابة دفع.','svc3.price':'من 800$',
+    'svc4.name':'تطبيق موبايل','svc4.desc':'تطبيقات iOS وAndroid بـ Flutter.','svc4.price':'من 500$',
+    'svc5.name':'تطبيق سطح مكتب','svc5.desc':'برامج قوية لـ Windows/Linux.','svc5.price':'من 600$',
+    'svc6.name':'تصميم قواعد البيانات','svc6.desc':'بنية قواعد بيانات محسّنة.','svc6.price':'من 100$',
+    'svc7.name':'تكامل الذكاء الاصطناعي','svc7.desc':'دمج نماذج الذكاء الاصطناعي في أنظمتك.','svc7.price':'من 300$',
+    'svc8.name':'صيانة ودعم','svc8.desc':'دعم مستمر وإصلاح الأخطاء.','svc8.price':'من 50$/شهر',
     'quote.eyebrow':'تقدير فوري','quote.title':'احصل على عرض مجاني',
     'quote.sub':'أدخل تفاصيل مشروعك واحصل على تقدير فوري.',
     'quote.formtitle':'تفاصيل المشروع','quote.empty':'أكمل النموذج واضغط احسب للحصول على عرض أسعار.',
@@ -299,12 +294,12 @@ window.addEventListener('load', () => {
 });
 
 // ============================
-// QUOTATION CALCULATOR (prices in DA - Algerian Dinar)
+// QUOTATION CALCULATOR
 // ============================
 const PRICING = {
-  base: { landing:26000, business:26000, ecommerce:39000, mobile:65000, desktop:39000, ai:26000 },
-  pageRate: 2500,
-  features: { fMobile:65000, fDatabase:13000, fAuth:6500, fPayment:19500, fAI:39000, fAdmin:10500 }
+  base: { landing:200, business:200, ecommerce:300, mobile:500, desktop:300, ai:200 },
+  pageRate: 20,
+  features: { fMobile:500, fDatabase:100, fAuth:50, fPayment:150, fAI:300, fAdmin:80 }
 };
 const TIMELINE = {
   landing:'1-2 weeks', business:'2-4 weeks', ecommerce:'4-8 weeks',
@@ -321,13 +316,13 @@ function calculateQuote() {
     return;
   }
   const pages = parseInt(document.getElementById('qPages').value) || 1;
-  let total = PRICING.base[service] || 26000;
+  let total = PRICING.base[service] || 200;
   const breakdown = [{ label: 'Base price (' + service + ')', price: total }];
   const extraPages = Math.max(0, pages - 1);
   if (extraPages > 0) {
     const pageCost = extraPages * PRICING.pageRate;
     total += pageCost;
-    breakdown.push({ label: `Additional pages (${extraPages} × ${PRICING.pageRate.toLocaleString()} DA)`, price: pageCost });
+    breakdown.push({ label: `Additional pages (${extraPages} × $${PRICING.pageRate})`, price: pageCost });
   }
   const featureLabels = { fMobile:'Mobile App Version', fDatabase:'Database', fAuth:'User Authentication', fPayment:'Payment System', fAI:'AI Features', fAdmin:'Admin Dashboard' };
   Object.entries(PRICING.features).forEach(([id, cost]) => {
@@ -336,19 +331,19 @@ function calculateQuote() {
       breakdown.push({ label: featureLabels[id], price: cost });
     }
   });
-  const complexity = total < 80000 ? 'Low' : total < 160000 ? 'Medium' : 'High';
+  const complexity = total < 600 ? 'Low' : total < 1200 ? 'Medium' : 'High';
   const timeline = TIMELINE[service] || '4-8 weeks';
 
   document.getElementById('quotePlaceholder').style.display = 'none';
   const resultEl = document.getElementById('quoteResult');
   resultEl.classList.add('show');
-  document.getElementById('qTotal').textContent = total.toLocaleString() + ' DA';
+  document.getElementById('qTotal').textContent = '$' + total.toLocaleString();
   document.getElementById('qTotalNote').textContent = 'Excluding taxes. Final price may vary.';
   document.getElementById('qTimeline').textContent = timeline;
   const cx = document.getElementById('qComplexity');
   cx.innerHTML = `<span class="complexity-badge complexity-${complexity.toLowerCase()}">${complexity}</span>`;
-  let bHTML = breakdown.map((b,i) => `<div class="breakdown-item"><span class="breakdown-label">${b.label}</span><span class="breakdown-price">+${b.price.toLocaleString()} DA</span></div>`).join('');
-  bHTML += `<div class="breakdown-item"><span>Total Estimate</span><span>${total.toLocaleString()} DA</span></div>`;
+  let bHTML = breakdown.map((b,i) => `<div class="breakdown-item"><span class="breakdown-label">${b.label}</span><span class="breakdown-price">+$${b.price}</span></div>`).join('');
+  bHTML += `<div class="breakdown-item"><span>Total Estimate</span><span>$${total.toLocaleString()}</span></div>`;
   document.getElementById('qBreakdown').innerHTML = bHTML;
   // Store for saving
   window._lastQuote = { name, email, service, desc, total, complexity, timeline, date: new Date().toLocaleDateString() };
@@ -374,7 +369,7 @@ function saveQuoteRequest() {
 function exportQuotePDF() {
   if (!window._lastQuote) { showToast('error','Please calculate a quote first.'); return; }
   const q = window._lastQuote;
-  const content = `HANAA DEV SOLUTIONS\nQuotation Summary\n${'='.repeat(40)}\n\nClient: ${q.name}\nEmail: ${q.email}\nService: ${q.service}\n\nProject Description:\n${q.desc}\n\n${'='.repeat(40)}\nESTIMATED BUDGET: ${q.total.toLocaleString()} DA\nTIMELINE: ${q.timeline}\nCOMPLEXITY: ${q.complexity}\n${'='.repeat(40)}\n\nDate: ${q.date}\n\nThank you for choosing Hanaa Dev Solutions!\nContact: hanaa@hanaadevsolutions.com`;
+  const content = `HANAA DEV SOLUTIONS\nQuotation Summary\n${'='.repeat(40)}\n\nClient: ${q.name}\nEmail: ${q.email}\nService: ${q.service}\n\nProject Description:\n${q.desc}\n\n${'='.repeat(40)}\nESTIMATED BUDGET: $${q.total}\nTIMELINE: ${q.timeline}\nCOMPLEXITY: ${q.complexity}\n${'='.repeat(40)}\n\nDate: ${q.date}\n\nThank you for choosing Hanaa Dev Solutions!\nContact: hanaa@hanaadevsolutions.com`;
   const blob = new Blob([content], {type:'text/plain'});
   const a = document.createElement('a'); a.href=URL.createObjectURL(blob);
   a.download=`Quote_${q.name.replace(/\s/g,'_')}.txt`; a.click();
@@ -411,7 +406,7 @@ function loadAdminData() {
   document.getElementById('statTotal').textContent = requests.length;
   if (requests.length > 0) {
     const avg = Math.round(requests.reduce((s,r)=>s+r.total,0)/requests.length);
-    document.getElementById('statAvg').textContent = avg.toLocaleString()+' DA';
+    document.getElementById('statAvg').textContent = '$'+avg;
     const high = requests.filter(r=>r.complexity==='High').length;
     document.getElementById('statHigh').textContent = high;
     const svcCount = {};
@@ -431,7 +426,7 @@ function loadAdminData() {
       <td><strong>${r.name}</strong></td>
       <td>${r.email}</td>
       <td>${r.service}</td>
-      <td style="color:var(--blue-light);font-weight:700">${r.total.toLocaleString()} DA</td>
+      <td style="color:var(--blue-light);font-weight:700">$${r.total}</td>
       <td><span class="complexity-badge complexity-${(r.complexity||'').toLowerCase()}">${r.complexity}</span></td>
       <td>${r.date}</td>
       <td>
@@ -451,7 +446,7 @@ function viewRequest(id) {
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
       <div><strong>Email:</strong><br>${r.email}</div>
       <div><strong>Service:</strong><br>${r.service}</div>
-      <div><strong>Quote:</strong><br><span style="color:var(--blue-light);font-weight:700;font-size:1.2rem">${r.total.toLocaleString()} DA</span></div>
+      <div><strong>Quote:</strong><br><span style="color:var(--blue-light);font-weight:700;font-size:1.2rem">$${r.total}</span></div>
       <div><strong>Complexity:</strong><br><span class="complexity-badge complexity-${(r.complexity||'').toLowerCase()}">${r.complexity}</span></div>
       <div><strong>Timeline:</strong><br>${r.timeline}</div>
       <div><strong>Date:</strong><br>${r.date}</div>
@@ -481,7 +476,7 @@ function exportAllPDF() {
   if (requests.length===0) { showToast('error','No requests to export.'); return; }
   let content = 'HANAA DEV SOLUTIONS — ALL REQUESTS\n'+'='.repeat(50)+'\n\n';
   requests.forEach((r,i) => {
-    content += `[${i+1}] ${r.name} | ${r.email} | ${r.service} | ${r.total.toLocaleString()} DA | ${r.complexity} | ${r.date}\n`;
+    content += `[${i+1}] ${r.name} | ${r.email} | ${r.service} | $${r.total} | ${r.complexity} | ${r.date}\n`;
   });
   const blob = new Blob([content],{type:'text/plain'});
   const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
@@ -493,13 +488,12 @@ function exportAllPDF() {
 // PROJECT MODALS
 // ============================
 const projectDetails = [
-  { title:'Sihaty DZ — Digital Health Platform 🏆', emoji:'🏥', desc:'A comprehensive digital health ecosystem designed for the Algerian healthcare system. Patients can register, search for doctors, book appointments, view medical history, and receive prescription reminders. Healthcare providers get a full dashboard for patient management. This project received an official Label recognizing its quality and impact.', tech:['PHP','MySQL','JavaScript','Bootstrap','REST API'], features:['Online appointment booking','Patient medical records','Doctor search & profiles','SMS reminders','Admin dashboard','🏆 Official Label awarded'] },
+  { title:'Sihaty DZ — Digital Health Platform', emoji:'🏥', desc:'A comprehensive digital health ecosystem designed for the Algerian healthcare system. Patients can register, search for doctors, book appointments, view medical history, and receive prescription reminders. Healthcare providers get a full dashboard for patient management.', tech:['PHP','MySQL','JavaScript','Bootstrap','REST API'], features:['Online appointment booking','Patient medical records','Doctor search & profiles','SMS reminders','Admin dashboard'] },
   { title:'Attendance System — Facial Recognition', emoji:'👁️', desc:'An AI-powered university attendance system using real-time facial recognition. The system automatically detects and logs student attendance, generates reports for professors, and sends notifications to absent students.', tech:['Python','OpenCV','TensorFlow','SQLite','Tkinter'], features:['Real-time face detection','Auto attendance logging','Professor report dashboard','Student notification system','Export to Excel'] },
   { title:'Restaurant Management Application', emoji:'🍽️', desc:'A complete restaurant management desktop application covering the entire operation — from table management and order taking to kitchen display, inventory control, billing, and detailed analytics.', tech:['Java','JavaFX','MySQL','JasperReports'], features:['Order & table management','Kitchen display system','Inventory tracking','Staff scheduling','Financial reports'] },
-  { title:'Chat App — Messenger-Style Messaging', emoji:'💬', desc:'A networked real-time chat application inspired by Messenger, supporting multiple concurrent users through multithreading. Includes private messaging, group chat rooms, and file sharing capabilities.', tech:['Java','Sockets','Multithreading','Swing GUI'], features:['Real-time messaging','Multiple chat rooms','Private messaging','File transfer','User authentication'] },
+  { title:'Java Client-Server Chat', emoji:'💬', desc:'A networked real-time chat application built with pure Java, supporting multiple concurrent users through multithreading. Includes private messaging, group chat rooms, and file sharing capabilities.', tech:['Java','Sockets','Multithreading','Swing GUI'], features:['Real-time messaging','Multiple chat rooms','Private messaging','File transfer','User authentication'] },
   { title:'E-Commerce Websites', emoji:'🛒', desc:'Multiple custom e-commerce solutions built for various clients. Each store features a product catalog, shopping cart, secure checkout with payment gateway integration, order tracking, and a full admin panel.', tech:['PHP','Laravel','Vue.js','MySQL','Stripe'], features:['Product catalog','Shopping cart','Payment integration','Order tracking','Admin panel'] },
-  { title:'Custom Mobile Applications', emoji:'📱', desc:'Cross-platform mobile applications developed with Flutter for both iOS and Android. These include apps for retail, services, and productivity, all featuring clean UI, offline support, and backend integration.', tech:['Flutter','Dart','Firebase','REST API'], features:['Cross-platform (iOS & Android)','Push notifications','Offline mode','Firebase integration','Clean Material UI'] },
-  { title:'MyRein — Dialysis Patient Companion App', emoji:'🩺', desc:'A dedicated mobile companion for patients with kidney disease undergoing dialysis. The app centralizes every piece of information patients need to manage their condition day to day — dialysis session tracking, medication schedules, lab results history, dietary guidance, and appointment reminders — so patients and their care teams stay on the same page.', tech:['Flutter','Dart','Firebase','REST API'], features:['Dialysis session tracking','Medication reminders','Lab results history','Diet & fluid intake tracking','Appointment reminders','Secure patient data storage'] }
+  { title:'Custom Mobile Applications', emoji:'📱', desc:'Cross-platform mobile applications developed with Flutter for both iOS and Android. These include apps for retail, services, and productivity, all featuring clean UI, offline support, and backend integration.', tech:['Flutter','Dart','Firebase','REST API'], features:['Cross-platform (iOS & Android)','Push notifications','Offline mode','Firebase integration','Clean Material UI'] }
 ];
 
 function openProjectModal(idx) {
