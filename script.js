@@ -224,7 +224,7 @@ const i18n = {
 // ============================
 // FIREBASE CONFIGURATION
 // ============================
-// Import Firebase modules
+// Import Firebase modules (single shared app instance — see firebase-config.js)
 import { 
     db, 
     SERVICE_REQUESTS, 
@@ -768,6 +768,28 @@ function escapeHtml(text) {
   div.textContent = text;
   return div.innerHTML;
 }
+
+// ============================
+// EXPOSE HANDLERS USED BY INLINE onclick="" ATTRIBUTES
+// ============================
+// This file is loaded as an ES module (type="module"), so top-level
+// declarations are scoped to the module and are NOT visible to inline
+// HTML "onclick" attributes (those run in the global scope). Without
+// these assignments every button in the page — Calculate Quote, Send
+// Request, Export PDF, Contact form, project "Details" modals, and the
+// entire Admin Dashboard — would throw "X is not defined" and do nothing.
+window.calculateQuote = calculateQuote;
+window.saveQuoteRequest = saveQuoteRequest;
+window.exportQuotePDF = exportQuotePDF;
+window.sendContact = sendContact;
+window.openAdmin = openAdmin;
+window.closeAdmin = closeAdmin;
+window.viewRequest = viewRequest;
+window.deleteRequest = deleteRequest;
+window.clearAllRequests = clearAllRequests;
+window.exportAllPDF = exportAllPDF;
+window.openProjectModal = openProjectModal;
+window.closeModal = closeModal;
 
 // ============================
 // INITIALIZATION
