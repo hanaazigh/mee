@@ -355,93 +355,97 @@ function calculateQuote() {
   showToast('success', 'Quote calculated successfully!');
 }
 
-// FIX: helper so every fetch call surfaces the real error message coming
-// back from api.php (validation errors, DB errors, etc.) instead of a
-// generic failure — before, `.then(r => r.json())` never checked r.ok, so a
-// 422/500 response was parsed and used as if it had succeeded.
+// ============================
+// CORRECTED API REQUEST FUNCTION
+// ============================
 async function apiRequest(url, options = {}) {
-    console.log('API Request:', url, options);
     try {
         const response = await fetch(url, options);
+        
+        // Read the response body ONCE as JSON
         let data = {};
-        try { 
-            data = await response.json(); 
-        } catch (e) { 
-            console.error('Failed to parse JSON:', e);
+        try {
+            data = await response.json();
+        } catch (e) {
+            // If JSON parsing fails, try to get text for debugging
             const text = await response.text();
-            console.error('Response text:', text);
-            throw new Error('Server returned invalid response: ' + text.substring(0, 100));
+            console.error('Server returned non-JSON:', text.substring(0, 200));
+            throw new Error('Server returned invalid response');
         }
+        
+        // Check if response was successful
         if (!response.ok) {
             throw new Error(data.error || `Request failed (${response.status})`);
         }
+        
         return data;
     } catch (error) {
         console.error('API Error:', error);
         throw error;
     }
 }
+
 // ============================
 // SAVE QUOTE REQUEST TO DATABASE
 // ============================
 function saveQuoteRequest() {
-  if (!window._lastQuote) {
-    showToast('error', 'Please calculate your quote first.');
-    return;
-  }
-
-  const q = window._lastQuote;
-
-  const features = [];
-  const featureMap = {
-    'fMobile': 'Mobile App Version',
-    'fDatabase': 'Database',
-    'fAuth': 'User Authentication',
-    'fPayment': 'Payment System',
-    'fAI': 'AI Features',
-    'fAdmin': 'Admin Dashboard'
-  };
-
-  Object.keys(featureMap).forEach(id => {
-    if (document.getElementById(id).checked) {
-      features.push(featureMap[id]);
+    if (!window._lastQuote) {
+        showToast('error', 'Please calculate your quote first.');
+        return;
     }
-  });
 
-  const requestData = {
-    name: q.name,
-    email: q.email,
-    phone: document.getElementById('qPhone').value.trim(),
-    company: document.getElementById('qCompany').value.trim(),
-    service: q.service,
-    description: q.desc,
-    pages: parseInt(document.getElementById('qPages').value) || 1,
-    features: features,
-    deadline: document.getElementById('qDeadline').value || null,
-    total: q.total,
-    complexity: q.complexity,
-    timeline: q.timeline
-  };
+    const q = window._lastQuote;
 
-  apiRequest('api.php?action=save_request', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(requestData)
-  })
-  .then(() => {
-    showToast('success', 'Your request has been submitted! We\'ll be in touch soon.');
-    ['qName','qEmail','qPhone','qCompany','qDesc'].forEach(id => document.getElementById(id).value='');
-    document.getElementById('qService').value='';
-    document.getElementById('qPages').value='5';
-    ['fMobile','fDatabase','fAuth','fPayment','fAI','fAdmin'].forEach(id => document.getElementById(id).checked=false);
-    document.getElementById('quoteResult').classList.remove('show');
-    document.getElementById('quotePlaceholder').style.display='flex';
-    window._lastQuote = null;
-  })
-  .catch(error => {
-    console.error('Error:', error);
-    showToast('error', error.message || 'Failed to submit request. Please try again.');
-  });
+    const features = [];
+    const featureMap = {
+        'fMobile': 'Mobile App Version',
+        'fDatabase': 'Database',
+        'fAuth': 'User Authentication',
+        'fPayment': 'Payment System',
+        'fAI': 'AI Features',
+        'fAdmin': 'Admin Dashboard'
+    };
+
+    Object.keys(featureMap).forEach(id => {
+        if (document.getElementById(id).checked) {
+            features.push(featureMap[id]);
+        }
+    });
+
+    const requestData = {
+        name: q.name,
+        email: q.email,
+        phone: document.getElementById('qPhone').value.trim(),
+        company: document.getElementById('qCompany').value.trim(),
+        service: q.service,
+        description: q.desc,
+        pages: parseInt(document.getElementById('qPages').value) || 1,
+        features: features,
+        deadline: document.getElementById('qDeadline').value || null,
+        total: q.total,
+        complexity: q.complexity,
+        timeline: q.timeline
+    };
+
+    apiRequest('api.php?action=save_request', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(requestData)
+    })
+    .then(() => {
+        showToast('success', 'Your request has been submitted! We\'ll be in touch soon.');
+        ['qName','qEmail','qPhone','qCompany','qDesc'].forEach(id => document.getElementById(id).value='');
+        document.getElementById('qService').value='';
+        document.getElementById('qPages').value='5';
+        ['fMobile','fDatabase','fAuth','fPayment','fAI','fAdmin'].forEach(id => document.getElementById(id).checked=false);
+        document.getElementById('quoteResult').classList.remove('show');
+        document.getElementById('quotePlaceholder').style.display='flex';
+        window._lastQuote = null;
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showToast('error', error.message || 'Failed to submit request. Please try again.');
+    });
 }
 
 // ============================
@@ -503,6 +507,7 @@ function closeAdmin() {
 }
 
 function loadAdminData() {
+  // Load stats
   apiRequest('api.php?action=get_stats')
     .then(stats => {
       document.getElementById('statTotal').textContent = stats.total || 0;
@@ -512,6 +517,7 @@ function loadAdminData() {
     })
     .catch(error => console.error('Error loading stats:', error));
 
+  // Load requests
   apiRequest('api.php?action=get_requests')
     .then(requests => {
       const tbody = document.getElementById('requestsTableBody');
