@@ -221,10 +221,38 @@ const i18n = {
   }
 };
 
+// ============================
+// FIREBASE CONFIGURATION
+// ============================
+// Import Firebase modules (single shared app instance — see firebase-config.js)
+import { 
+    db, 
+    SERVICE_REQUESTS, 
+    CONTACT_MESSAGES,
+    collection, 
+    addDoc, 
+    getDocs, 
+    getDoc, 
+    doc, 
+    deleteDoc, 
+    updateDoc,
+    query,
+    orderBy,
+    where,
+    Timestamp,
+    serverTimestamp
+} from './firebase-config.js';
+
+// ============================
+// GLOBAL STATE
+// ============================
 let currentLang = 'en';
 const langCycle = ['en', 'fr', 'ar'];
 const langLabels = {en:'EN', fr:'FR', ar:'AR'};
 
+// ============================
+// TRANSLATIONS FUNCTION
+// ============================
 function applyLang(lang) {
   currentLang = lang;
   document.documentElement.setAttribute('data-lang', lang);
@@ -267,7 +295,6 @@ window.addEventListener('scroll', () => {
   sp.style.width = pct + '%';
   const bt = document.getElementById('backTop');
   if (window.scrollY > 400) bt.classList.add('show'); else bt.classList.remove('show');
-  // Nav highlight
   const sections = ['home','about','portfolio','services','quote','testimonials','contact'];
   let current = '';
   sections.forEach(id => {
@@ -349,26 +376,24 @@ function calculateQuote() {
   let bHTML = breakdown.map((b,i) => `<div class="breakdown-item"><span class="breakdown-label">${b.label}</span><span class="breakdown-price">+${b.price.toLocaleString()} DA</span></div>`).join('');
   bHTML += `<div class="breakdown-item"><span>Total Estimate</span><span>${total.toLocaleString()} DA</span></div>`;
   document.getElementById('qBreakdown').innerHTML = bHTML;
-  // Store for saving
-  window._lastQuote = { 
-    name, email, service, desc, total, complexity, timeline, 
-    date: new Date().toLocaleDateString() 
+  window._lastQuote = {
+    name, email, service, desc, total, complexity, timeline,
+    date: new Date().toLocaleDateString()
   };
   showToast('success', 'Quote calculated successfully!');
 }
 
 // ============================
-// SAVE QUOTE REQUEST TO DATABASE
+// FIREBASE: SAVE QUOTE REQUEST
 // ============================
-function saveQuoteRequest() {
-    if (!window._lastQuote) { 
-        showToast('error', 'Please calculate your quote first.'); 
-        return; 
+async function saveQuoteRequest() {
+    if (!window._lastQuote) {
+        showToast('error', 'Please calculate your quote first.');
+        return;
     }
-    
+
     const q = window._lastQuote;
-    
-    // Get selected features
+
     const features = [];
     const featureMap = {
         'fMobile': 'Mobile App Version',
@@ -378,56 +403,48 @@ function saveQuoteRequest() {
         'fAI': 'AI Features',
         'fAdmin': 'Admin Dashboard'
     };
-    
+
     Object.keys(featureMap).forEach(id => {
         if (document.getElementById(id).checked) {
             features.push(featureMap[id]);
         }
     });
-    
-    const requestData = {
-        name: q.name,
-        email: q.email,
-        phone: document.getElementById('qPhone').value.trim(),
-        company: document.getElementById('qCompany').value.trim(),
-        service: q.service,
-        description: q.desc,
-        pages: parseInt(document.getElementById('qPages').value) || 1,
-        features: features,
-        deadline: document.getElementById('qDeadline').value || null,
-        total: q.total,
-        complexity: q.complexity,
-        timeline: q.timeline
-    };
-    
-    // Send to API
-    fetch('api.php?action=save_request', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            showToast('success', 'Your request has been submitted! We\'ll be in touch soon.');
-            // Reset form
-            ['qName','qEmail','qPhone','qCompany','qDesc'].forEach(id => document.getElementById(id).value='');
-            document.getElementById('qService').value='';
-            document.getElementById('qPages').value='5';
-            ['fMobile','fDatabase','fAuth','fPayment','fAI','fAdmin'].forEach(id => document.getElementById(id).checked=false);
-            document.getElementById('quoteResult').classList.remove('show');
-            document.getElementById('quotePlaceholder').style.display='flex';
-            window._lastQuote = null;
-        } else {
-            showToast('error', data.error || 'Failed to submit request');
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        showToast('error', 'Failed to submit request. Please try again.');
-    });
+
+    try {
+        const requestData = {
+            client_name: q.name,
+            client_email: q.email,
+            client_phone: document.getElementById('qPhone').value.trim() || '',
+            company_name: document.getElementById('qCompany').value.trim() || '',
+            service_type: q.service,
+            project_description: q.desc,
+            pages: parseInt(document.getElementById('qPages').value) || 1,
+            features: features,
+            deadline: document.getElementById('qDeadline').value || null,
+            total_quote: q.total,
+            complexity: q.complexity,
+            timeline: q.timeline,
+            status: 'new',
+            created_at: serverTimestamp()
+        };
+
+        const docRef = await addDoc(collection(db, SERVICE_REQUESTS), requestData);
+        
+        showToast('success', 'Your request has been submitted! We\'ll be in touch soon.');
+        
+        // Reset form
+        ['qName','qEmail','qPhone','qCompany','qDesc'].forEach(id => document.getElementById(id).value='');
+        document.getElementById('qService').value='';
+        document.getElementById('qPages').value='5';
+        ['fMobile','fDatabase','fAuth','fPayment','fAI','fAdmin'].forEach(id => document.getElementById(id).checked=false);
+        document.getElementById('quoteResult').classList.remove('show');
+        document.getElementById('quotePlaceholder').style.display='flex';
+        window._lastQuote = null;
+        
+    } catch (error) {
+        console.error('Error saving request:', error);
+        showToast('error', error.message || 'Failed to submit request. Please try again.');
+    }
 }
 
 // ============================
@@ -444,49 +461,43 @@ function exportQuotePDF() {
 }
 
 // ============================
-// CONTACT FORM
+// FIREBASE: CONTACT FORM
 // ============================
-function sendContact() {
+async function sendContact() {
     const name = document.getElementById('cName').value.trim();
     const email = document.getElementById('cEmail').value.trim();
     const subject = document.getElementById('cSubject').value.trim();
     const msg = document.getElementById('cMessage').value.trim();
-    
-    if (!name || !email || !subject || !msg) { 
-        showToast('error', 'Please fill in all fields.'); 
-        return; 
+
+    if (!name || !email || !subject || !msg) {
+        showToast('error', 'Please fill in all fields.');
+        return;
     }
-    if (!email.includes('@')) { 
-        showToast('error', 'Please enter a valid email.'); 
-        return; 
+    if (!email.includes('@')) {
+        showToast('error', 'Please enter a valid email.');
+        return;
     }
-    
-    const data = { name, email, subject, message: msg };
-    
-    fetch('api.php?action=save_contact', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(result => {
-        if (result.success) {
-            showToast('success', 'Message sent! I\'ll reply within 24 hours.');
-            ['cName','cEmail','cSubject','cMessage'].forEach(id => document.getElementById(id).value='');
-        } else {
-            showToast('error', result.error || 'Failed to send message');
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        showToast('error', 'Failed to send message. Please try again.');
-    });
+
+    try {
+        await addDoc(collection(db, CONTACT_MESSAGES), {
+            name: name,
+            email: email,
+            subject: subject,
+            message: msg,
+            created_at: serverTimestamp()
+        });
+        
+        showToast('success', 'Message sent! I\'ll reply within 24 hours.');
+        ['cName','cEmail','cSubject','cMessage'].forEach(id => document.getElementById(id).value='');
+        
+    } catch (error) {
+        console.error('Error sending contact:', error);
+        showToast('error', error.message || 'Failed to send message. Please try again.');
+    }
 }
 
 // ============================
-// ADMIN PANEL
+// ADMIN PANEL - FIREBASE
 // ============================
 function openAdmin() {
   document.getElementById('admin').classList.add('open');
@@ -497,153 +508,199 @@ function closeAdmin() {
   document.getElementById('admin').classList.remove('open');
 }
 
-function loadAdminData() {
-    // Load stats
-    fetch('api.php?action=get_stats')
-        .then(response => response.json())
-        .then(stats => {
-            if (!stats.error) {
-                document.getElementById('statTotal').textContent = stats.total || 0;
-                document.getElementById('statAvg').textContent = (stats.avg || 0).toLocaleString() + ' DA';
-                document.getElementById('statHigh').textContent = stats.high || 0;
-                document.getElementById('statServices').textContent = stats.top || '—';
-            }
-        })
-        .catch(error => console.error('Error loading stats:', error));
-    
-    // Load requests
-    fetch('api.php?action=get_requests')
-        .then(response => response.json())
-        .then(requests => {
-            const tbody = document.getElementById('requestsTableBody');
-            const noReq = document.getElementById('noRequests');
-            
-            if (!requests || requests.length === 0 || requests.error) {
-                tbody.innerHTML = '';
-                noReq.style.display = 'block';
-                return;
-            }
-            
-            noReq.style.display = 'none';
-            tbody.innerHTML = requests.map((r, i) => `
-                <tr>
-                    <td>${i+1}</td>
-                    <td><strong>${escapeHtml(r.client_name)}</strong></td>
-                    <td>${escapeHtml(r.client_email)}</td>
-                    <td>${escapeHtml(r.service_type)}</td>
-                    <td style="color:var(--blue-light);font-weight:700">${parseFloat(r.total_quote).toLocaleString()} DA</td>
-                    <td><span class="complexity-badge complexity-${(r.complexity || '').toLowerCase()}">${escapeHtml(r.complexity)}</span></td>
-                    <td>${r.created_at ? new Date(r.created_at).toLocaleDateString() : ''}</td>
-                    <td>
-                        <button class="tbl-btn" onclick="viewRequest(${r.id})"><i class="fa fa-eye"></i></button>
-                        <button class="tbl-btn danger" onclick="deleteRequest(${r.id})"><i class="fa fa-trash"></i></button>
-                    </td>
-                </tr>
-            `).join('');
-        })
-        .catch(error => {
-            console.error('Error loading requests:', error);
-            showToast('error', 'Failed to load requests');
-        });
+async function loadAdminData() {
+    try {
+        await loadStats();
+        await loadRequests();
+    } catch (error) {
+        console.error('Error loading admin data:', error);
+        showToast('error', 'Failed to load admin data');
+    }
 }
 
-function viewRequest(id) {
-    fetch(`api.php?action=get_request&id=${id}`)
-        .then(response => response.json())
-        .then(r => {
-            if (r.error) {
-                showToast('error', r.error);
-                return;
-            }
-            
-            document.getElementById('modalTitle').textContent = `Request from ${r.client_name}`;
-            document.getElementById('modalBody').innerHTML = `
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
-                    <div><strong>Email:</strong><br>${escapeHtml(r.client_email)}</div>
-                    <div><strong>Service:</strong><br>${escapeHtml(r.service_type)}</div>
-                    <div><strong>Quote:</strong><br><span style="color:var(--blue-light);font-weight:700;font-size:1.2rem">${parseFloat(r.total_quote).toLocaleString()} DA</span></div>
-                    <div><strong>Complexity:</strong><br><span class="complexity-badge complexity-${(r.complexity || '').toLowerCase()}">${escapeHtml(r.complexity)}</span></div>
-                    <div><strong>Timeline:</strong><br>${escapeHtml(r.timeline)}</div>
-                    <div><strong>Date:</strong><br>${r.created_at ? new Date(r.created_at).toLocaleDateString() : ''}</div>
-                </div>
-                <div><strong>Description:</strong><br><p style="color:var(--text-secondary);margin-top:0.5rem;line-height:1.6">${escapeHtml(r.project_description)}</p></div>
-                ${r.features ? `<div><strong>Features:</strong><br><p style="color:var(--text-secondary);margin-top:0.5rem">${Array.isArray(r.features) ? r.features.join(', ') : r.features}</p></div>` : ''}
-            `;
-            document.getElementById('projectModal').classList.add('open');
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            showToast('error', 'Failed to load request details');
+async function loadStats() {
+    try {
+        const q = query(collection(db, SERVICE_REQUESTS));
+        const snapshot = await getDocs(q);
+        const requests = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        
+        const total = requests.length;
+        const totalQuote = requests.reduce((sum, r) => sum + (r.total_quote || 0), 0);
+        const avg = total > 0 ? totalQuote / total : 0;
+        const high = requests.filter(r => r.complexity === 'High').length;
+        
+        // Get top service
+        const serviceCount = {};
+        requests.forEach(r => {
+            const service = r.service_type || 'Unknown';
+            serviceCount[service] = (serviceCount[service] || 0) + 1;
         });
+        let topService = '—';
+        let maxCount = 0;
+        Object.entries(serviceCount).forEach(([service, count]) => {
+            if (count > maxCount) {
+                maxCount = count;
+                topService = service;
+            }
+        });
+        
+        document.getElementById('statTotal').textContent = total;
+        document.getElementById('statAvg').textContent = Math.round(avg).toLocaleString() + ' DA';
+        document.getElementById('statHigh').textContent = high;
+        document.getElementById('statServices').textContent = topService;
+        
+    } catch (error) {
+        console.error('Error loading stats:', error);
+        throw error;
+    }
 }
 
-function deleteRequest(id) {
+async function loadRequests() {
+    try {
+        const q = query(
+            collection(db, SERVICE_REQUESTS),
+            orderBy('created_at', 'desc')
+        );
+        const snapshot = await getDocs(q);
+        const requests = snapshot.docs.map(doc => ({ 
+            id: doc.id, 
+            ...doc.data(),
+            created_at: doc.data().created_at?.toDate?.() || null
+        }));
+
+        const tbody = document.getElementById('requestsTableBody');
+        const noReq = document.getElementById('noRequests');
+
+        if (requests.length === 0) {
+            tbody.innerHTML = '';
+            noReq.style.display = 'block';
+            return;
+        }
+
+        noReq.style.display = 'none';
+        tbody.innerHTML = requests.map((r, i) => {
+            const dateStr = r.created_at ? r.created_at.toLocaleDateString() : 'N/A';
+            return `
+            <tr>
+                <td>${i+1}</td>
+                <td><strong>${escapeHtml(r.client_name)}</strong></td>
+                <td>${escapeHtml(r.client_email)}</td>
+                <td>${escapeHtml(r.service_type)}</td>
+                <td style="color:var(--blue-light);font-weight:700">${(r.total_quote || 0).toLocaleString()} DA</td>
+                <td><span class="complexity-badge complexity-${(r.complexity || '').toLowerCase()}">${escapeHtml(r.complexity)}</span></td>
+                <td>${dateStr}</td>
+                <td>
+                    <button class="tbl-btn" onclick="viewRequest('${r.id}')"><i class="fa fa-eye"></i></button>
+                    <button class="tbl-btn danger" onclick="deleteRequest('${r.id}')"><i class="fa fa-trash"></i></button>
+                </td>
+            </tr>
+        `}).join('');
+        
+    } catch (error) {
+        console.error('Error loading requests:', error);
+        throw error;
+    }
+}
+
+async function viewRequest(id) {
+    try {
+        const docRef = doc(db, SERVICE_REQUESTS, id);
+        const docSnap = await getDoc(docRef);
+        
+        if (!docSnap.exists()) {
+            showToast('error', 'Request not found');
+            return;
+        }
+        
+        const r = { id: docSnap.id, ...docSnap.data() };
+        const dateStr = r.created_at?.toDate?.()?.toLocaleDateString() || 'N/A';
+        
+        document.getElementById('modalTitle').textContent = `Request from ${r.client_name}`;
+        document.getElementById('modalBody').innerHTML = `
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
+                <div><strong>Email:</strong><br>${escapeHtml(r.client_email)}</div>
+                <div><strong>Service:</strong><br>${escapeHtml(r.service_type)}</div>
+                <div><strong>Quote:</strong><br><span style="color:var(--blue-light);font-weight:700;font-size:1.2rem">${(r.total_quote || 0).toLocaleString()} DA</span></div>
+                <div><strong>Complexity:</strong><br><span class="complexity-badge complexity-${(r.complexity || '').toLowerCase()}">${escapeHtml(r.complexity)}</span></div>
+                <div><strong>Timeline:</strong><br>${escapeHtml(r.timeline)}</div>
+                <div><strong>Date:</strong><br>${dateStr}</div>
+            </div>
+            <div><strong>Description:</strong><br><p style="color:var(--text-secondary);margin-top:0.5rem;line-height:1.6">${escapeHtml(r.project_description)}</p></div>
+            ${r.features ? `<div><strong>Features:</strong><br><p style="color:var(--text-secondary);margin-top:0.5rem">${Array.isArray(r.features) ? r.features.map(escapeHtml).join(', ') : escapeHtml(r.features)}</p></div>` : ''}
+        `;
+        document.getElementById('projectModal').classList.add('open');
+        
+    } catch (error) {
+        console.error('Error viewing request:', error);
+        showToast('error', error.message || 'Failed to load request details');
+    }
+}
+
+async function deleteRequest(id) {
     if (!confirm('Delete this request?')) return;
-    
-    fetch(`api.php?action=delete_request&id=${id}`, {
-        method: 'DELETE'
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            loadAdminData();
-            showToast('success', 'Request deleted.');
-        } else {
-            showToast('error', data.error || 'Failed to delete request');
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        showToast('error', 'Failed to delete request');
-    });
+
+    try {
+        await deleteDoc(doc(db, SERVICE_REQUESTS, id));
+        loadAdminData();
+        showToast('success', 'Request deleted.');
+    } catch (error) {
+        console.error('Error deleting request:', error);
+        showToast('error', error.message || 'Failed to delete request');
+    }
 }
 
-function clearAllRequests() {
+async function clearAllRequests() {
     if (!confirm('Clear all requests? This cannot be undone.')) return;
-    
-    fetch('api.php?action=clear_requests', {
-        method: 'DELETE'
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            loadAdminData();
-            showToast('success', 'All requests cleared.');
-        } else {
-            showToast('error', data.error || 'Failed to clear requests');
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        showToast('error', 'Failed to clear requests');
-    });
+
+    try {
+        const q = query(collection(db, SERVICE_REQUESTS));
+        const snapshot = await getDocs(q);
+        
+        const deletePromises = snapshot.docs.map(doc => 
+            deleteDoc(doc.ref)
+        );
+        
+        await Promise.all(deletePromises);
+        loadAdminData();
+        showToast('success', 'All requests cleared.');
+        
+    } catch (error) {
+        console.error('Error clearing requests:', error);
+        showToast('error', error.message || 'Failed to clear requests');
+    }
 }
 
-function exportAllPDF() {
-    fetch('api.php?action=get_requests')
-        .then(response => response.json())
-        .then(requests => {
-            if (!requests || requests.length === 0 || requests.error) {
-                showToast('error', 'No requests to export.');
-                return;
-            }
-            
-            let content = 'HANAA DEV SOLUTIONS — ALL REQUESTS\n' + '='.repeat(50) + '\n\n';
-            requests.forEach((r, i) => {
-                content += `[${i+1}] ${r.client_name} | ${r.client_email} | ${r.service_type} | ${parseFloat(r.total_quote).toLocaleString()} DA | ${r.complexity} | ${r.created_at ? new Date(r.created_at).toLocaleDateString() : ''}\n`;
-            });
-            
-            const blob = new Blob([content], { type: 'text/plain' });
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = 'All_Requests.txt';
-            a.click();
-            showToast('success', 'Exported!');
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            showToast('error', 'Failed to export requests');
+async function exportAllPDF() {
+    try {
+        const q = query(
+            collection(db, SERVICE_REQUESTS),
+            orderBy('created_at', 'desc')
+        );
+        const snapshot = await getDocs(q);
+        const requests = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+        if (requests.length === 0) {
+            showToast('error', 'No requests to export.');
+            return;
+        }
+
+        let content = 'HANAA DEV SOLUTIONS — ALL REQUESTS\n' + '='.repeat(50) + '\n\n';
+        requests.forEach((r, i) => {
+            const dateStr = r.created_at?.toDate?.()?.toLocaleDateString() || 'N/A';
+            content += `[${i+1}] ${r.client_name} | ${r.client_email} | ${r.service_type} | ${(r.total_quote || 0).toLocaleString()} DA | ${r.complexity} | ${dateStr}\n`;
         });
+
+        const blob = new Blob([content], { type: 'text/plain' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'All_Requests.txt';
+        a.click();
+        showToast('success', 'Exported!');
+        
+    } catch (error) {
+        console.error('Error exporting requests:', error);
+        showToast('error', error.message || 'Failed to export requests');
+    }
 }
 
 // ============================
@@ -706,20 +763,41 @@ function showToast(type, msg) {
 // HELPER FUNCTIONS
 // ============================
 function escapeHtml(text) {
-    if (!text) return '';
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
+  if (text === null || text === undefined) return '';
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
 }
+
+// ============================
+// EXPOSE HANDLERS USED BY INLINE onclick="" ATTRIBUTES
+// ============================
+// This file is loaded as an ES module (type="module"), so top-level
+// declarations are scoped to the module and are NOT visible to inline
+// HTML "onclick" attributes (those run in the global scope). Without
+// these assignments every button in the page — Calculate Quote, Send
+// Request, Export PDF, Contact form, project "Details" modals, and the
+// entire Admin Dashboard — would throw "X is not defined" and do nothing.
+window.calculateQuote = calculateQuote;
+window.saveQuoteRequest = saveQuoteRequest;
+window.exportQuotePDF = exportQuotePDF;
+window.sendContact = sendContact;
+window.openAdmin = openAdmin;
+window.closeAdmin = closeAdmin;
+window.viewRequest = viewRequest;
+window.deleteRequest = deleteRequest;
+window.clearAllRequests = clearAllRequests;
+window.exportAllPDF = exportAllPDF;
+window.openProjectModal = openProjectModal;
+window.closeModal = closeModal;
 
 // ============================
 // INITIALIZATION
 // ============================
-// Set min date for deadline
 document.getElementById('qDeadline').min = new Date().toISOString().split('T')[0];
 
-// Initial lang
 applyLang('en');
 
 console.log('🚀 Hanaa Dev Solutions loaded successfully!');
-console.log('💾 MySQL Database integration enabled');
+console.log('🔥 Firebase Firestore integration enabled');
+console.log('📊 Collections: service_requests, contact_messages');

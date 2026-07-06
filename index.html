@@ -544,7 +544,8 @@
   </div>
   <div class="footer-bottom">
     <span>© 2025 Hanaa Dev Solutions. <span data-i18n="footer.rights">All rights reserved.</span></span>
-    </div>
+    <span onclick="openAdmin()" title="Admin Panel" data-i18n="footer.admin">Admin Panel</span>
+  </div>
 </footer>
 
 <!-- ADMIN PANEL -->
@@ -608,6 +609,10 @@
 
 <!-- BACK TO TOP -->
 <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fa fa-arrow-up"></i></button>
-<script src="script.js"></script>
+
+<!-- Firebase app + Firestore + Analytics are initialized once, inside firebase-config.js,
+     which script.js imports. Do not add a second <script type="module"> here that calls
+     initializeApp() again — Firebase throws if the same app name is initialized twice. -->
+<script type="module" src="script.js"></script>
 </body>
 </html>
