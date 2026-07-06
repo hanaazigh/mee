@@ -1,0 +1,35 @@
+mutation CreateProfile($displayName: String!, $bio: String!, $email: String!) @auth(level: USER) {
+  profile_insert(data: {
+    displayName: $displayName,
+    bio: $bio,
+    email: $email
+  })
+}
+
+query GetProfile @auth(level: USER) {
+  profile(key: {id_expr: "auth.uid"}) {
+    displayName
+    bio
+    email
+    projects_on_profile {
+      title
+      description
+      projectTags_on_project {
+        tagName
+      }
+    }
+  }
+}
+
+mutation AddProject($title: String!, $description: String!, $displayOrder: Int!) @auth(level: USER) {
+  project_insert(data: {
+    title: $title,
+    description: $description,
+    displayOrder: $displayOrder,
+    profileId_expr: "auth.uid"
+  })
+}
+
+mutation UpdateSkill($id: UUID!, $proficiency: Int!) @auth(level: USER) {
+  skill_update(key: {id: $id}, data: {proficiencyLevel: $proficiency})
+}

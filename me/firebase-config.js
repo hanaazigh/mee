@@ -24,9 +24,11 @@ import {
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
 
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyC_btqLjglHoKJOxZphBZ4lpvlyNyTdLG8",
   authDomain: "portfolio-42f1f.firebaseapp.com",
+  databaseURL: "https://portfolio-42f1f-default-rtdb.firebaseio.com",
   projectId: "portfolio-42f1f",
   storageBucket: "portfolio-42f1f.firebasestorage.app",
   messagingSenderId: "565461051369",
