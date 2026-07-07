@@ -323,7 +323,6 @@ window.addEventListener('load', () => {
     setTimeout(() => document.getElementById('preloader').style.display='none', 600);
   }, 800);
 });
-
 // ============================
 // QUOTATION CALCULATOR (prices in DA - Algerian Dinar)
 // ============================

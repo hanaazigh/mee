@@ -1,0 +1,40 @@
+[debug] [2026-07-06T17:47:00.342Z] ----------------------------------------------------------------------
+[debug] [2026-07-06T17:47:00.346Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\hanaa\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2026-07-06T17:47:00.347Z] CLI Version:   15.22.4
+[debug] [2026-07-06T17:47:00.347Z] Platform:      win32
+[debug] [2026-07-06T17:47:00.347Z] Node Version:  v24.18.0
+[debug] [2026-07-06T17:47:00.347Z] Detected Agent: unknown
+[debug] [2026-07-06T17:47:00.347Z] Time:          Mon Jul 06 2026 18:47:00 GMT+0100 (heure d’Afrique de l’Ouest)
+[debug] [2026-07-06T17:47:00.348Z] ----------------------------------------------------------------------
+[debug] 
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\hanaa\OneDrive\Bureau\mine\mee
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] 
+[debug] [2026-07-06T17:47:10.914Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-07-06T17:47:10.915Z] > authorizing via signed-in user (hanaazigh6@gmail.com)
+[debug] [2026-07-06T17:47:10.918Z] Checked if tokens are valid: true, expires at: 1783362482752
+[debug] [2026-07-06T17:47:10.918Z] Checked if tokens are valid: true, expires at: 1783362482752
+[debug] [2026-07-06T17:47:10.921Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/portfolio-42f1f [none]
+[debug] [2026-07-06T17:47:11.425Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/portfolio-42f1f 403
+[debug] [2026-07-06T17:47:11.425Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/portfolio-42f1f {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2026-07-06T17:47:11.425Z] Request to https://firebase.googleapis.com/v1beta1/projects/portfolio-42f1f had HTTP Error: 403, The caller does not have permission
+[debug] [2026-07-06T17:47:11.630Z] FirebaseError: Request to https://firebase.googleapis.com/v1beta1/projects/portfolio-42f1f had HTTP Error: 403, The caller does not have permission
+    at responseToError (C:\Users\hanaa\AppData\Roaming\npm\node_modules\firebase-tools\lib\responseToError.js:53:12)
+    at RetryOperation._fn (C:\Users\hanaa\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:381:77)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+[error] 
+[error] Error: Failed to get Firebase project portfolio-42f1f. Please make sure the project exists and your account has permission to access it.
