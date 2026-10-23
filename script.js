@@ -327,9 +327,9 @@ window.addEventListener('load', () => {
 // QUOTATION CALCULATOR (prices in DA - Algerian Dinar)
 // ============================
 const PRICING = {
-  base: { landing:26000, business:26000, ecommerce:39000, mobile:65000, desktop:39000, ai:26000 },
+  base: { landing:2600, business:2600, ecommerce:3900, mobile:6500, desktop:3900, ai:2600 },
   pageRate: 2500,
-  features: { fMobile:65000, fDatabase:13000, fAuth:6500, fPayment:19500, fAI:39000, fAdmin:10500 }
+  features: { fMobile:6500, fDatabase:1300, fAuth:650, fPayment:1950, fAI:3900, fAdmin:1100 }
 };
 const TIMELINE = {
   landing:'1-2 weeks', business:'2-4 weeks', ecommerce:'4-8 weeks',
