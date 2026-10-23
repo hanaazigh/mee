@@ -31,14 +31,14 @@ const i18n = {
     'btn.details':'Details','btn.demo':'Live Demo','btn.code':'View Code',
     'services.eyebrow':'What I Offer','services.title':'My Services',
     'services.sub':'Professional development services tailored to your business goals and budget.',
-    'svc1.name':'Landing Page','svc1.desc':'High-converting landing pages designed to capture leads and showcase your brand.','svc1.price':'From 26,000 DA',
-    'svc2.name':'Business Website','svc2.desc':'Multi-page professional websites for companies and service-based businesses.','svc2.price':'From 26,000 DA',
-    'svc3.name':'E-Commerce Website','svc3.desc':'Full-featured online stores with payment integration and admin panel.','svc3.price':'From 3900 DA',
-    'svc4.name':'Mobile Application','svc4.desc':'Cross-platform iOS & Android apps built with Flutter.','svc4.price':'From 65,000 DA',
-    'svc5.name':'Desktop Application','svc5.desc':'Powerful desktop software for Windows/Linux.','svc5.price':'From 3900 DA',
-    'svc6.name':'Database Design','svc6.desc':'Optimized relational and NoSQL database architecture.','svc6.price':'From 13,000 DA',
-    'svc7.name':'AI Integration','svc7.desc':'Integrate ML models, chatbots, computer vision into your systems.','svc7.price':'From 26,000 DA',
-    'svc8.name':'Maintenance & Support','svc8.desc':'Ongoing support, bug fixes, and performance optimization.','svc8.price':'From 6,500 DA/mo',
+    'svc1.name':'Landing Page','svc1.desc':'High-converting landing pages designed to capture leads and showcase your brand.','svc1.price':'From 2000 DA',
+    'svc2.name':'Business Website','svc2.desc':'Multi-page professional websites for companies and service-based businesses.','svc2.price':'From 2500 DA',
+    'svc3.name':'E-Commerce Website','svc3.desc':'Full-featured online stores with payment integration and admin panel.','svc3.price':'From 3500 DA',
+    'svc4.name':'Mobile Application','svc4.desc':'Cross-platform iOS & Android apps built with Flutter.','svc4.price':'From 4500 DA',
+    'svc5.name':'Desktop Application','svc5.desc':'Powerful desktop software for Windows/Linux.','svc5.price':'From 3000 DA',
+    'svc6.name':'Database Design','svc6.desc':'Optimized relational and NoSQL database architecture.','svc6.price':'From 1000 DA',
+    'svc7.name':'AI Integration','svc7.desc':'Integrate ML models, chatbots, computer vision into your systems.','svc7.price':'From 3000 DA',
+    'svc8.name':'Maintenance & Support','svc8.desc':'Ongoing support, bug fixes, and performance optimization.','svc8.price':'From 2000 DA/mo',
     'quote.eyebrow':'Instant Estimate','quote.title':'Get a Free Quote',
     'quote.sub':'Fill in your project details and get an instant price estimate with timeline.',
     'quote.formtitle':'Project Details','quote.empty':'Fill in the form and click Calculate to see your instant quote.',
@@ -107,14 +107,14 @@ const i18n = {
     'btn.details':'Détails','btn.demo':'Démo live','btn.code':'Voir le code',
     'services.eyebrow':'Ce que j\'offre','services.title':'Mes Services',
     'services.sub':'Services de développement professionnel adaptés à vos objectifs.',
-    'svc1.name':'Page d\'atterrissage','svc1.desc':'Pages à fort taux de conversion pour capter des prospects.','svc1.price':'À partir de 26 000 DA',
-    'svc2.name':'Site Web Professionnel','svc2.desc':'Sites multi-pages pour entreprises et professionnels.','svc2.price':'À partir de 26 000 DA',
-    'svc3.name':'Site E-Commerce','svc3.desc':'Boutiques en ligne complètes avec paiement intégré.','svc3.price':'À partir de 39 000 DA',
-    'svc4.name':'Application Mobile','svc4.desc':'Apps iOS & Android multiplateformes avec Flutter.','svc4.price':'À partir de 65 000 DA',
-    'svc5.name':'Application Desktop','svc5.desc':'Logiciels de bureau puissants.','svc5.price':'À partir de 39 000 DA',
-    'svc6.name':'Conception de Base de données','svc6.desc':'Architecture de base de données optimisée.','svc6.price':'À partir de 13 000 DA',
-    'svc7.name':'Intégration IA','svc7.desc':'Intégrez des modèles ML, chatbots, vision par ordinateur.','svc7.price':'À partir de 26 000 DA',
-    'svc8.name':'Maintenance & Support','svc8.desc':'Support continu, corrections de bugs et optimisation.','svc8.price':'À partir de 6 500 DA/mois',
+    'svc1.name':'Page d\'atterrissage','svc1.desc':'Pages à fort taux de conversion pour capter des prospects.','svc1.price':'À partir de 2 000 DA',
+    'svc2.name':'Site Web Professionnel','svc2.desc':'Sites multi-pages pour entreprises et professionnels.','svc2.price':'À partir de 2 500 DA',
+    'svc3.name':'Site E-Commerce','svc3.desc':'Boutiques en ligne complètes avec paiement intégré.','svc3.price':'À partir de 3 500 DA',
+    'svc4.name':'Application Mobile','svc4.desc':'Apps iOS & Android multiplateformes avec Flutter.','svc4.price':'À partir de 4 500 DA',
+    'svc5.name':'Application Desktop','svc5.desc':'Logiciels de bureau puissants.','svc5.price':'À partir de 3 000 DA',
+    'svc6.name':'Conception de Base de données','svc6.desc':'Architecture de base de données optimisée.','svc6.price':'À partir de 1 000 DA',
+    'svc7.name':'Intégration IA','svc7.desc':'Intégrez des modèles ML, chatbots, vision par ordinateur.','svc7.price':'À partir de 3 000 DA',
+    'svc8.name':'Maintenance & Support','svc8.desc':'Support continu, corrections de bugs et optimisation.','svc8.price':'À partir de 2 000 DA/mois',
     'quote.eyebrow':'Estimation instantanée','quote.title':'Obtenez un Devis Gratuit',
     'quote.sub':'Remplissez les détails de votre projet et obtenez une estimation instantanée.',
     'quote.formtitle':'Détails du Projet','quote.empty':'Remplissez le formulaire et cliquez sur Calculer.',
@@ -177,14 +177,14 @@ const i18n = {
     'btn.details':'التفاصيل','btn.demo':'عرض حي','btn.code':'الكود',
     'services.eyebrow':'ما أقدمه','services.title':'خدماتي',
     'services.sub':'خدمات تطوير احترافية مصممة لأهدافك.',
-    'svc1.name':'صفحة هبوط','svc1.desc':'صفحات هبوط عالية التحويل لعرض علامتك التجارية.','svc1.price':'من 26,000 دج',
-    'svc2.name':'موقع أعمال','svc2.desc':'مواقع متعددة الصفحات للشركات والمهنيين.','svc2.price':'من 26,000 دج',
-    'svc3.name':'موقع تجارة إلكترونية','svc3.desc':'متاجر إلكترونية كاملة مع بوابة دفع.','svc3.price':'من 3900 دج',
-    'svc4.name':'تطبيق موبايل','svc4.desc':'تطبيقات iOS وAndroid بـ Flutter.','svc4.price':'من 65,000 دج',
-    'svc5.name':'تطبيق سطح مكتب','svc5.desc':'برامج قوية لـ Windows/Linux.','svc5.price':'من 3900 دج',
-    'svc6.name':'تصميم قواعد البيانات','svc6.desc':'بنية قواعد بيانات محسّنة.','svc6.price':'من 13,000 دج',
-    'svc7.name':'تكامل الذكاء الاصطناعي','svc7.desc':'دمج نماذج الذكاء الاصطناعي في أنظمتك.','svc7.price':'من 26,000 دج',
-    'svc8.name':'صيانة ودعم','svc8.desc':'دعم مستمر وإصلاح الأخطاء.','svc8.price':'من 6,500 دج/شهر',
+    'svc1.name':'صفحة هبوط','svc1.desc':'صفحات هبوط عالية التحويل لعرض علامتك التجارية.','svc1.price':'من 2000 دج',
+    'svc2.name':'موقع أعمال','svc2.desc':'مواقع متعددة الصفحات للشركات والمهنيين.','svc2.price':'من 2500 دج',
+    'svc3.name':'موقع تجارة إلكترونية','svc3.desc':'متاجر إلكترونية كاملة مع بوابة دفع.','svc3.price':'من 3500 دج',
+    'svc4.name':'تطبيق موبايل','svc4.desc':'تطبيقات iOS وAndroid بـ Flutter.','svc4.price':'من 4500 دج',
+    'svc5.name':'تطبيق سطح مكتب','svc5.desc':'برامج قوية لـ Windows/Linux.','svc5.price':'من 3000 دج',
+    'svc6.name':'تصميم قواعد البيانات','svc6.desc':'بنية قواعد بيانات محسّنة.','svc6.price':'من 1000 دج',
+    'svc7.name':'تكامل الذكاء الاصطناعي','svc7.desc':'دمج نماذج الذكاء الاصطناعي في أنظمتك.','svc7.price':'من 3000 دج',
+    'svc8.name':'صيانة ودعم','svc8.desc':'دعم مستمر وإصلاح الأخطاء.','svc8.price':'من 2000 دج/شهر',
     'quote.eyebrow':'تقدير فوري','quote.title':'احصل على عرض مجاني',
     'quote.sub':'أدخل تفاصيل مشروعك واحصل على تقدير فوري.',
     'quote.formtitle':'تفاصيل المشروع','quote.empty':'أكمل النموذج واضغط احسب للحصول على عرض أسعار.',
@@ -323,13 +323,15 @@ window.addEventListener('load', () => {
     setTimeout(() => document.getElementById('preloader').style.display='none', 600);
   }, 800);
 });
+
 // ============================
 // QUOTATION CALCULATOR (prices in DA - Algerian Dinar)
+// Adjusted for student-friendly pricing (2000 DA – 10000 DA)
 // ============================
 const PRICING = {
-  base: { landing:2600, business:2600, ecommerce:3900, mobile:6500, desktop:3900, ai:2600 },
-  pageRate: 2500,
-  features: { fMobile:6500, fDatabase:1300, fAuth:650, fPayment:1950, fAI:3900, fAdmin:1100 }
+  base: { landing:2000, business:2500, ecommerce:3500, mobile:4500, desktop:3000, ai:3000 },
+  pageRate: 200,
+  features: { fMobile:1500, fDatabase:300, fAuth:200, fPayment:500, fAI:900, fAdmin:300 }
 };
 const TIMELINE = {
   landing:'1-2 weeks', business:'2-4 weeks', ecommerce:'4-8 weeks',
@@ -346,7 +348,7 @@ function calculateQuote() {
     return;
   }
   const pages = parseInt(document.getElementById('qPages').value) || 1;
-  let total = PRICING.base[service] || 26000;
+  let total = PRICING.base[service] || 2000;
   const breakdown = [{ label: 'Base price (' + service + ')', price: total }];
   const extraPages = Math.max(0, pages - 1);
   if (extraPages > 0) {
@@ -361,7 +363,7 @@ function calculateQuote() {
       breakdown.push({ label: featureLabels[id], price: cost });
     }
   });
-  const complexity = total < 80000 ? 'Low' : total < 160000 ? 'Medium' : 'High';
+  const complexity = total < 4000 ? 'Low' : total < 7000 ? 'Medium' : 'High';
   const timeline = TIMELINE[service] || '4-8 weeks';
 
   document.getElementById('quotePlaceholder').style.display = 'none';
@@ -771,12 +773,6 @@ function escapeHtml(text) {
 // ============================
 // EXPOSE HANDLERS USED BY INLINE onclick="" ATTRIBUTES
 // ============================
-// This file is loaded as an ES module (type="module"), so top-level
-// declarations are scoped to the module and are NOT visible to inline
-// HTML "onclick" attributes (those run in the global scope). Without
-// these assignments every button in the page — Calculate Quote, Send
-// Request, Export PDF, Contact form, project "Details" modals, and the
-// entire Admin Dashboard — would throw "X is not defined" and do nothing.
 window.calculateQuote = calculateQuote;
 window.saveQuoteRequest = saveQuoteRequest;
 window.exportQuotePDF = exportQuotePDF;
